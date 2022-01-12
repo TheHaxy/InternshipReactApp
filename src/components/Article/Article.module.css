@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+.article__main_page{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.articles__img__main_page{
+    width: 55%;
+    height: auto;
+}
+
+.article__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.article__other__info, .author, .views{
+    color: #8C8C8C;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.views, .time{
+    font-size: 12px;
+}
+
+.author{
+    font-weight: 500;
+}
+
+.article__other__info{
+    gap: 24px;
+    padding: 0 0 17px 0;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.author__img{
+    border-radius: 50%;
+}
+
+.article__title{
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    margin: 0 0 16px 0;
+}
+
+.article__tag{
+    width: min-content;
+    display: inline;
+    color: #8C8C8C;
+    font-size: 12px;
+    background: #F6F6F6;
+    padding: 7px 12px;
+    border-radius: 118px;
+    margin: 0 0 24px 0;
+}
+
+.article__subtitle__main_page{
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #8C8C8C;
+    margin: 0 0 29px 0;
+    max-height: 160px;
+
+}
+
+/*ArticleList classes*/
+
+.article__article_list{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 40px 0;
+}
+
+.article__img__article_list{
+    width: 35%;
+    height: auto;
+}
+
+.article__subtitle__article_list{
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #8C8C8C;
+    margin: 0 0 24px 0;
+    max-height: 80px;
+    overflow: hidden;
+}

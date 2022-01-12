@@ -3,8 +3,7 @@
 button{
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 16px;
-    width: 113px;
-    height: 47px;
+    padding: 15px 32px;
 }
 
 .button__outlined__header{
@@ -28,4 +27,12 @@ button{
     background: #242424;
     border: 1px solid #EBEBEB;
     color: #EBEBEB;
+}
+
+.button__article_list_prev{
+
+}
+
+.button__article_list_next{
+
 }

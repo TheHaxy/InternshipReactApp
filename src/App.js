@@ -1,12 +1,15 @@
+import {Route, Routes} from "react-router-dom";
 import './App.css';
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import MainPage from "./components/MainPage/MainPage";
+import Login from "./components/Login/Login";
 
 function App() {
     return (
         <div className="App">
-            <Header/>
-            <Footer/>
+            <Routes>
+                <Route path='/main-page' element={<MainPage/>} />
+                <Route path='/login' element={<Login/>} />
+            </Routes>
         </div>
     );
 }
