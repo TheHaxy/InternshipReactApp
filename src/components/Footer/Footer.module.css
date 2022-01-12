@@ -1,0 +1,17 @@
+.footer{
+    background: #242424;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+}
+
+.copyright__info{
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    width: 60%;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
