@@ -1,10 +1,10 @@
-.input {
+.input__true {
     padding: 15px 10px;
     width: 100%;
     border: 1px solid #8C8C8C;
 }
 
-.input:active, .input:hover, .input:focus {
+.input__true:active, .input__true:hover, .input__true:focus {
     border: 1px solid #8C8C8C;
     outline: none;
 }
@@ -19,3 +19,15 @@
     font-size: 0.875rem;
     margin-bottom: 12px;
 }
+
+.input__false {
+    padding: 15px 10px;
+    width: 100%;
+    border: 1px solid #CF4949;
+}
+
+.input__false:active, .input__false:hover, .input__false:focus {
+    border: 1px solid #CF4949;
+    outline: none;
+}
+

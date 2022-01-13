@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 
+import { Patterns } from "../../../appConstants";
+
 import InputClasses from "./Input.module.css";
 
-const Input = ({ text, name, type, inputChange }) => {
-  const [inputValue, setInputValue] = useState("");
+const Input = ({ text, name, type }) => {
+  const [isValid, setIsValid] = useState(true)
 
   const handleChange = (e) => {
-    setInputValue(e.target.value);
-    inputChange(inputValue);
+    if (!Patterns[e.target.name].test(e.target.value) && e.target.value) setIsValid(false)
+    else setIsValid(true)
   };
-  console.log(inputValue);
+
   return (
     <label className={InputClasses[`input__block`]}>
       <p className={InputClasses[`input__name`]}>{text}</p>
       <input
-        className={InputClasses.input}
+        className={InputClasses[`input__${isValid}`]}
         type={type}
         name={name}
         onChange={(e) => handleChange(e)}
-        value={inputValue}
       />
     </label>
   );

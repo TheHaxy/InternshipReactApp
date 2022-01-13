@@ -27,7 +27,7 @@ const ArticleList = [
     img: articleImg3,
     author: `Winston Marshall`,
     date: `Jun 13 · 5 min read`,
-    views: 1699,
+    views: 1900,
     id: 2,
   },
   {

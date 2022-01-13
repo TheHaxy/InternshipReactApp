@@ -5,21 +5,20 @@ import Button from "../UI/Button/Button";
 
 import articles from "../../mockdata/articleData";
 
+import { APP_ARTICLES_PAGE } from '../../appConstants'
+
 import articleListClasses from "./ArticleList.module.css";
 
 const ArticleList = () => {
-  const ArticlesInPage = 6;
   const [count, setCount] = useState(0);
 
-  const onclickNextButton = useCallback(() => {
-    setCount(count + 1);
-    ArticleList();
-  }, [count]);
+  const onClickNextButton = useCallback(() => {
+    setCount(count  => count + 1);
+  }, []);
 
-  const onclickPrevButton = useCallback(() => {
-    setCount(count - 1);
-    ArticleList();
-  }, [count]);
+  const onClickPrevButton = useCallback(() => {
+    setCount(count => count - 1);
+  }, []);
 
   return (
     <section className={articleListClasses[`article__list`]}>
@@ -28,8 +27,8 @@ const ArticleList = () => {
       </h1>
       <div>
         {articles
-          .slice(count * ArticlesInPage, (count + 1) * ArticlesInPage)
-          .map((article) => {
+          .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
+          .map((article, index) => {
             return (
               <Article
                 title={article.title}
@@ -39,7 +38,7 @@ const ArticleList = () => {
                 date={article.date}
                 views={article.views}
                 location={`article_list`}
-                key={Math.random()}
+                key={index}
               />
             );
           })}
@@ -48,14 +47,14 @@ const ArticleList = () => {
         <Button
           variant={`outlined__header`}
           name="Prev"
-          onClick={onclickPrevButton}
-          isDisable={!(count * ArticlesInPage >= ArticlesInPage)}
+          onClick={onClickPrevButton}
+          isDisable={!(count * APP_ARTICLES_PAGE >= APP_ARTICLES_PAGE)}
         />
         <Button
           variant={`outlined__header`}
           name="Next"
-          onClick={onclickNextButton}
-          isDisable={count * ArticlesInPage >= articles.length - 1}
+          onClick={onClickNextButton}
+          isDisable={count * APP_ARTICLES_PAGE >= articles.length - 1}
         />
       </div>
     </section>
