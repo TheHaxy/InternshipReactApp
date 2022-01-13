@@ -16,14 +16,15 @@ const SignInPage = () => {
           Create your free account
         </h1>
         <form noValidate={true} className={SignInPageClasses[`signing__form`]}>
-          <Input text="First name" name="firstName" type="text" />
-          <Input text="Last name" name="lastName" type="text" />
+          <Input text="First name" name="firstName" type="text" notValidText='Please enter a first name.' />
+          <Input text="Last name" name="lastName" type="text" notValidText='Please enter a last name.' />
           <Input
             text="Email Address"
             name="email"
             type="email"
+            notValidText='Please enter your username or email address.'
           />
-          <Input text="Password" name="password" type="password" />
+          <Input text="Password" name="password" type="password" notValidText='Please enter a password.' />
           <Button
             name="Create account"
             variant="contained__login"

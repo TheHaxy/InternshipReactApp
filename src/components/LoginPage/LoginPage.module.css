@@ -28,9 +28,11 @@
     font-weight: 400;
     line-height: 1rem;
     font-size: 1rem;
+    color: rgba(36, 36, 36, 1);
 }
 
 .login__subtitle span {
     font-weight: 700;
     text-decoration: underline 2px;
+    color: rgba(36, 36, 36, 1);
 }
