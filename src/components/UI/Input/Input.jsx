@@ -14,7 +14,7 @@ const Input = ({ text, name, type, inputChange }) => {
     <label className={InputClasses[`input__block`]}>
       <p className={InputClasses[`input__name`]}>{text}</p>
       <input
-        className={InputClasses[`input__${inputChange}`]}
+        className={InputClasses.input}
         type={type}
         name={name}
         onChange={(e) => handleChange(e)}

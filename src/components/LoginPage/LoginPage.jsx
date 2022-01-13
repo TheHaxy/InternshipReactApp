@@ -6,15 +6,6 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
 const LoginPage = () => {
-  const emailPattern = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/;
-  const passwordPattern =
-    /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-
-  const inputEmailChange = (inputValue, e) => {
-    e.preventDefault();
-    console.log(inputValue);
-    return emailPattern.test(inputValue);
-  };
   return (
     <>
       <Header />
@@ -25,11 +16,7 @@ const LoginPage = () => {
         <form noValidate={true} className={LoginPageClasses[`login__form`]}>
           <Input text="Email Address" name="email" type="email" />
           <Input text="Password" name="password" type="password" />
-          <Button
-            name="Log in"
-            variant="contained__login"
-            onClick={inputEmailChange()}
-          />
+          <Button name="Log in" variant="contained__login" />
         </form>
         <p className={LoginPageClasses[`login__subtitle`]}>
           Don’t have a Times account? <span>Create one</span>
