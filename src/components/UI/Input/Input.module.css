@@ -1,0 +1,21 @@
+.input {
+    padding: 15px 10px;
+    width: 100%;
+    border: 1px solid #8C8C8C;
+}
+
+.input:active, .input:hover, .input:focus {
+    border: 1px solid #8C8C8C;
+    outline: none;
+}
+
+.input__block {
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.input__name {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    margin-bottom: 12px;
+}

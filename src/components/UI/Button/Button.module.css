@@ -6,6 +6,10 @@ button {
     padding: 1rem 2rem;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .button__outlined__header {
     background: transparent;
     border: 1px solid #242424;
@@ -29,7 +33,16 @@ button {
     color: #EBEBEB;
 }
 
+.button__outlined__header:disabled {
+    cursor: default;
+    color: #242424;
+    opacity: 25%;
+}
 
-.button__outlined__header__disable {
-    background: red;
+.button__contained__login {
+    width: 100%;
+    margin: 16px 0 24px 0;
+    background: #242424;
+    border: none;
+    color: white;
 }

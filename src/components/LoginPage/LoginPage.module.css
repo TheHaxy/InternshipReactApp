@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+.login__page {
+    width: 396px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    margin-bottom: 171px;
+}
+
+.login__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.25rem;
+    line-height: 3.5rem;
+    margin-bottom: 48px;
+}
+
+.login__subtitle {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1rem;
+    font-size: 1rem;
+}
+
+.login__subtitle span {
+    font-weight: 700;
+    text-decoration: underline 2px;
+}

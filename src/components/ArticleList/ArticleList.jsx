@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import Article from "../Article/Article";
 import Button from "../UI/Button/Button";
@@ -9,22 +9,17 @@ import articleListClasses from "./ArticleList.module.css";
 
 const ArticleList = () => {
   const ArticlesInPage = 6;
-  let prevStateDisable = true;
-  let nextStateDisable = false;
-  const [articlePage, setArticlePage] = useState(ArticlesInPage);
+  const [count, setCount] = useState(0);
 
-  if (articlePage > ArticlesInPage) prevStateDisable = false;
-  if (articlePage >= articles.length) nextStateDisable = true;
-
-  const onclickNextButton = () => {
-    setArticlePage(articlePage + ArticlesInPage);
+  const onclickNextButton = useCallback(() => {
+    setCount(count + 1);
     ArticleList();
-  };
+  }, [count]);
 
-  const onclickPrevButton = () => {
-    setArticlePage(articlePage - ArticlesInPage);
+  const onclickPrevButton = useCallback(() => {
+    setCount(count - 1);
     ArticleList();
-  };
+  }, [count]);
 
   return (
     <section className={articleListClasses[`article__list`]}>
@@ -32,11 +27,9 @@ const ArticleList = () => {
         Popular articles
       </h1>
       <div>
-        {articles.map((article) => {
-          if (
-            article.id <= articlePage &&
-            article.id > articlePage - ArticlesInPage
-          ) {
+        {articles
+          .slice(count * ArticlesInPage, (count + 1) * ArticlesInPage)
+          .map((article) => {
             return (
               <Article
                 title={article.title}
@@ -46,23 +39,23 @@ const ArticleList = () => {
                 date={article.date}
                 views={article.views}
                 location={`article_list`}
+                key={Math.random()}
               />
             );
-          }
-        })}
+          })}
       </div>
       <div className={articleListClasses[`article__list__nav__button`]}>
         <Button
           variant={`outlined__header`}
           name="Prev"
           onClick={onclickPrevButton}
-          isDisable={prevStateDisable}
+          isDisable={!(count * ArticlesInPage >= ArticlesInPage)}
         />
         <Button
           variant={`outlined__header`}
           name="Next"
           onClick={onclickNextButton}
-          isDisable={nextStateDisable}
+          isDisable={count * ArticlesInPage >= articles.length - 1}
         />
       </div>
     </section>

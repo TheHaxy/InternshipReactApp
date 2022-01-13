@@ -1,13 +1,20 @@
 .header__logo {
     align-self: center;
+}
 
+.header__logo:hover {
+    cursor: pointer;
 }
 
 .footer__logo {
-    max-width: 268px;
-    height: auto;
+    align-self: center;
     fill: #EBEBEB;
 }
+
+.footer__logo:hover {
+    cursor: pointer;
+}
+
 
 .header__buttons {
     display: flex;
