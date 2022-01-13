@@ -29,10 +29,7 @@ button {
     color: #EBEBEB;
 }
 
-.button__article_list_prev {
 
-}
-
-.button__article_list_next {
-
+.button__outlined__header__disable {
+    background: red;
 }

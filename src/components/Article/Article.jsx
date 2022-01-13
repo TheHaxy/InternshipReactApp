@@ -13,26 +13,19 @@ import eyeIcon from "../../assets/Vector.svg";
 
 import articleClasses from "./Article.module.css";
 
-const Article = ({ location }) => {
+const Article = ({ location, title, subtitle, image, author, date, views }) => {
   return (
     <div className={articleClasses[`article__${location}`]}>
       <img
         className={articleClasses[`article__img__${location}`]}
-        src={articleImg3}
+        src={image}
         alt={`Article image`}
       />
       <section className={articleClasses[`article__info`]}>
         <p className={articleClasses[`article__tag`]}>#Typography</p>
-        <h1 className={articleClasses[`article__title`]}>
-          Humane Typography in the Digital Age
-        </h1>
+        <h1 className={articleClasses[`article__title`]}>{title}</h1>
         <p className={articleClasses[`article__subtitle__${location}`]}>
-          Human beings aren’t perfect. Perfection is something that will always
-          elude us. There will always be a small part of humanity in everything
-          we do. No matter ho w small that part, we should make sure that it
-          transcends the limits of the med ium. We have to think about the
-          message first. What typeface should we use and why? Does the typeface
-          match the message and what?
+          {subtitle}
         </p>
         <div className={articleClasses[`article__other__info`]}>
           <div className={articleClasses.author}>
@@ -41,12 +34,12 @@ const Article = ({ location }) => {
               src={authorImg}
               alt="author"
             />
-            <p className={articleClasses[`author__name`]}>Janay Wright</p>
+            <p className={articleClasses[`author__name`]}>{author}</p>
           </div>
-          <p className={articleClasses.time}>Jun 13 · 5 min read</p>
+          <p className={articleClasses.time}>{date}</p>
           <div className={articleClasses.views}>
             <img src={eyeIcon} alt="eye__icon" />
-            <p>1690</p>
+            <p>{views}</p>
           </div>
         </div>
       </section>
