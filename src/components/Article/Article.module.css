@@ -1,99 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-.article__main_page{
+.article__main_page {
     display: flex;
     align-items: center;
     gap: 24px;
 }
 
-.articles__img__main_page{
+.articles__img__main_page {
     width: 55%;
     height: auto;
 }
 
-.article__info{
+.article__info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.article__other__info, .author, .views{
+.article__other__info, .author, .views {
     color: #8C8C8C;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.views, .time{
-    font-size: 12px;
+.views, .time {
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.author{
+.author {
     font-weight: 500;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.article__other__info{
+.article__other__info {
     gap: 24px;
-    padding: 0 0 17px 0;
+    padding-bottom: 17px;
     border-bottom: 1px solid #EBEBEB;
 }
 
-.author__img{
+.author__img {
     border-radius: 50%;
 }
 
-.article__title{
+.article__title {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 32px;
-    line-height: 40px;
-    margin: 0 0 16px 0;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-bottom: 16px;
 }
 
-.article__tag{
+.article__tag {
+    font-family: 'Inter', sans-serif;
     width: min-content;
     display: inline;
     color: #8C8C8C;
-    font-size: 12px;
+    font-size: 0.75rem;
     background: #F6F6F6;
-    padding: 7px 12px;
+    padding: 0.5rem 0.75rem;
     border-radius: 118px;
-    margin: 0 0 24px 0;
+    margin-bottom: 24px;
 }
 
-.article__subtitle__main_page{
+.article__subtitle__main_page {
     font-family: IBM Plex Sans, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 26px;
+    line-height: 1.62rem;
     color: #8C8C8C;
-    margin: 0 0 29px 0;
-    max-height: 160px;
+    margin-bottom: 29px;
 
 }
 
 /*ArticleList classes*/
 
-.article__article_list{
+.article__article_list {
     display: flex;
     align-items: center;
     gap: 24px;
     margin: 40px 0;
 }
 
-.article__img__article_list{
-    width: 35%;
-    height: auto;
+.article__img__article_list {
+
 }
 
-.article__subtitle__article_list{
-    font-family: IBM Plex Sans, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 26px;
-    color: #8C8C8C;
-    margin: 0 0 24px 0;
+.article__subtitle__article_list {
     max-height: 80px;
     overflow: hidden;
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.62rem;
+    color: #8C8C8C;
+    margin-bottom: 24px;
 }

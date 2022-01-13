@@ -1,18 +1,21 @@
-.footer{
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.footer {
     background: #242424;
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-content: space-between;
-    margin: 110px 0 0 0;
+    margin-top: 110px;
 }
 
-.copyright__info{
+.copyright__info {
+    font-family: 'Inter', sans-serif;
     padding: 24px 0;
     display: flex;
     justify-content: space-between;
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
-    width: 60%;
+    width: 100%;
+    max-width: 1070px;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }

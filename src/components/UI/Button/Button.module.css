@@ -1,38 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
-button{
+button {
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 16px;
-    padding: 15px 32px;
+    font-size: 1rem;
+    padding: 1rem 2rem;
 }
 
-.button__outlined__header{
+.button__outlined__header {
     background: transparent;
     border: 1px solid #242424;
 }
 
-.button__contained__header{
+.button__contained__header {
     background: #242424;
     border: none;
     color: white;
 }
 
-.button__outlined__footer{
+.button__outlined__footer {
     color: #EBEBEB;
     background: transparent;
     border: none;
 }
 
-.button__contained__footer{
+.button__contained__footer {
     background: #242424;
     border: 1px solid #EBEBEB;
     color: #EBEBEB;
 }
 
-.button__article_list_prev{
+.button__article_list_prev {
 
 }
 
-.button__article_list_next{
+.button__article_list_next {
 
 }

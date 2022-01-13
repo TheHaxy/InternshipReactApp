@@ -1,8 +1,9 @@
-.main{
+.main {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
     justify-content: center;
-}
-
-.wrap{
-    width: 58%;
+    margin: 0 10px;
+    max-width: 1070px;
 }
