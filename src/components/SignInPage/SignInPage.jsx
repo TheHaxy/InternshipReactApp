@@ -29,6 +29,7 @@ const SignInPage = () => {
             name="email"
             type="email"
             inputChange={inputEmailChange()}
+            onChange={inputEmailChange}
           />
           <Input text="Password" name="password" type="password" />
           <Button
