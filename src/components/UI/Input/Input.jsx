@@ -6,7 +6,6 @@ const Input = ({ text, name, type, inputChange }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (e) => {
-    e.preventDefault();
     setInputValue(e.target.value);
     inputChange(inputValue);
   };
@@ -15,7 +14,7 @@ const Input = ({ text, name, type, inputChange }) => {
     <label className={InputClasses[`input__block`]}>
       <p className={InputClasses[`input__name`]}>{text}</p>
       <input
-        className={InputClasses.input}
+        className={InputClasses[`input__${inputChange}`]}
         type={type}
         name={name}
         onChange={(e) => handleChange(e)}

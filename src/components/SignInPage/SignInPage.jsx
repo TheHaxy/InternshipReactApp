@@ -11,7 +11,7 @@ const SignInPage = () => {
   const passwordPattern =
     /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
 
-  const inputEmailChange = (inputValue, e) => {
+  const inputEmailChange = (inputValue) => {
     return emailPattern.test(inputValue);
   };
   return (
@@ -24,7 +24,12 @@ const SignInPage = () => {
         <form noValidate={true} className={SignInPageClasses[`signing__form`]}>
           <Input text="First name" name="first_name" type="text" />
           <Input text="Last name" name="last_email" type="text" />
-          <Input text="Email Address" name="email" type="email" />
+          <Input
+            text="Email Address"
+            name="email"
+            type="email"
+            inputChange={inputEmailChange()}
+          />
           <Input text="Password" name="password" type="password" />
           <Button
             name="Create account"

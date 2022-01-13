@@ -11,6 +11,8 @@ const LoginPage = () => {
     /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
 
   const inputEmailChange = (inputValue, e) => {
+    e.preventDefault();
+    console.log(inputValue);
     return emailPattern.test(inputValue);
   };
   return (
