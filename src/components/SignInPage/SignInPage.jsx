@@ -1,39 +1,40 @@
 import React, { useEffect, useState } from "react";
 
-import SignInPageClasses from "./SignInPage.module.css";
+import { usersData } from "../../mockdata/usersData";
+import { inputData } from "../../appConstants";
+
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
+import SignInPageClasses from "./SignInPage.module.css";
+
 const SignInPage = () => {
   const [isDisableBtn, setIsDisableBtn] = useState(true);
-  const [formState, setFormState] = useState({
-    firstName: {
-      value: "",
-      isValid: false,
-    },
-    lastName: {
-      value: "",
-      isValid: false,
-    },
-    email: {
-      value: "",
-      isValid: false,
-    },
-    password: {
-      value: "",
-      isValid: false,
-    },
-  });
-
+  const [formState, setFormState] = useState(inputData);
   const validState = [];
+  let usersArray = [];
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (localStorage.USERS_DATA) {
+      usersArray = JSON.parse(localStorage.getItem("USERS_DATA"));
+    }
+    usersArray.push({
+      name: `${formState.firstName.value} ${formState.lastName.value}`,
+      email: formState.email.value,
+      password: formState.password.value,
+    });
+    localStorage.setItem("USERS_DATA", JSON.stringify(usersArray));
+    console.log(usersArray);
+  };
+
   useEffect(() => {
     Object.keys(formState).map((i) => {
       validState.push(formState[i].isValid);
     });
     Object.keys(validState).map((i) => {
-      console.log(validState.filter((state) => !state).length);
       if (validState.filter((state) => !state).length) setIsDisableBtn(true);
       else setIsDisableBtn(false);
     });
@@ -82,6 +83,7 @@ const SignInPage = () => {
             name="Create account"
             variant="contained__login"
             isDisable={isDisableBtn}
+            onClick={(e) => submitForm(e)}
           />
         </form>
       </div>
