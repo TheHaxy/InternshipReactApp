@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { usersData } from "../../mockdata/usersData";
 import { inputData } from "../../appConstants";
 
 import Header from "../Header/Header";
@@ -18,9 +17,9 @@ const SignInPage = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (localStorage.USERS_DATA) {
-      usersArray = JSON.parse(localStorage.getItem("USERS_DATA"));
-    }
+    usersArray = localStorage.USERS_DATA
+      ? JSON.parse(localStorage.getItem("USERS_DATA"))
+      : [];
     usersArray.push({
       name: `${formState.firstName.value} ${formState.lastName.value}`,
       email: formState.email.value,
@@ -38,6 +37,7 @@ const SignInPage = () => {
       if (validState.filter((state) => !state).length) setIsDisableBtn(true);
       else setIsDisableBtn(false);
     });
+    console.log(formState);
   }, [formState]);
   return (
     <>

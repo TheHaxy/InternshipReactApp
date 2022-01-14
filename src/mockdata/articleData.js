@@ -16,7 +16,7 @@ const ArticleList = [
     img: articleImg2,
     author: `Winston Marshall`,
     date: `Jun 13 · 5 min read`,
-    views: 1700,
+    views: 1111111111111,
     id: 1,
   },
   {
@@ -60,7 +60,7 @@ const ArticleList = [
     img: articleImg3,
     author: `Winston Marshall`,
     date: `Jun 13 · 5 min read`,
-    views: 1699,
+    views: 1,
     id: 5,
   },
   {
