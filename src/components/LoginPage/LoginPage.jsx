@@ -17,20 +17,14 @@ const LoginPage = () => {
   const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
   const navigate = useNavigate();
 
-  const findEmail = () => {
-    let newMail = "";
-    Object.keys(usersStorage).map((i) => {
-      console.log(i);
-      newMail = formState[i].email.value;
-      console.log(newMail);
-    });
-    return newMail;
-  };
-
-  const clickLoginBth = () => {
-    let thisUser = usersStorage.find(findEmail);
-    if (thisUser.password === formState.password.value) {
+  const clickLoginBth = (e) => {
+    let thisUser = usersStorage.find(item => item.password === formState.password.value);
+    if (thisUser) {
       localStorage.setItem("LOGIN_USER", JSON.stringify(thisUser));
+      navigate("/main-page", { replace: true });
+    }
+    else{
+      e.preventDefault(e)
     }
   };
   return (
@@ -43,24 +37,29 @@ const LoginPage = () => {
         <form
           noValidate={true}
           className={LoginPageClasses[`login__form`]}
-          onSubmit={() => {
-            navigate("/main-page", { replace: true });
-            clickLoginBth();
-          }}
         >
           <Input
             text="Email Address"
             name="email"
             type="email"
+            notValidText="Please enter your username or email address."
             setFormState={setFormState}
           />
           <Input
             text="Password"
             name="password"
             type="password"
+            notValidText="Please enter a password."
             setFormState={setFormState}
           />
-          <Button name="Log in" variant="contained__login" />
+          <Button
+            name="Log in" v
+            variant="contained__login"
+            onClick={(e) => {
+              clickLoginBth(e);
+            }
+            }
+          />
         </form>
         <p className={LoginPageClasses[`login__subtitle`]}>
           Don’t have a Times account?{" "}

@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import InputClasses from "./Input.module.css";
 import { inputData, Patterns } from "../../../appConstants";
 
-const Input = ({ text, name, type, notValidText }) => {
-  const [formState, setFormState] = useState(inputData);
+const Input = ({ text, name, type, notValidText, formState, setFormState }) => {
   const [isValid, setIsValid] = useState(true);
   const newInputValue = (e) => {
     setFormState({

@@ -9,7 +9,7 @@ export const Patterns = {
   ),
 };
 
-export const inputData = {
+export let inputData = {
   firstName: {
     value: "",
     isValid: false,
