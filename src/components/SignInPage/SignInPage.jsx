@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { inputData } from "../../appConstants";
+import { signinData } from "../../appConstants";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../Header/Header";
@@ -13,7 +13,7 @@ import SignInPageClasses from "./SignInPage.module.css";
 const SignInPage = () => {
   let usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
   const [isDisableBtn, setIsDisableBtn] = useState(true);
-  const [formState, setFormState] = useState(inputData);
+  const [formState, setFormState] = useState(signinData);
   const navigate = useNavigate();
   const validState = [];
   let usersArray = [];
@@ -23,7 +23,7 @@ const SignInPage = () => {
     if (localStorage.USERS_DATA) {
       usersArray = JSON.parse(localStorage.getItem("USERS_DATA"));
     }
-    let checkUser = usersStorage.find(item => item.email === formState.email.value);
+    const checkUser = usersStorage.find(item => item.email === formState.email.value);
     if (!checkUser) {
       usersArray.push({
         name: `${formState.firstName.value} ${formState.lastName.value}`,
@@ -32,7 +32,6 @@ const SignInPage = () => {
       });
       localStorage.setItem("USERS_DATA", JSON.stringify(usersArray));
       usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
-      console.log(usersArray.pop);
       localStorage.setItem("LOGIN_USER", JSON.stringify(usersArray.pop()));
       navigate("/main-page", { replace: true });
 
@@ -42,6 +41,7 @@ const SignInPage = () => {
     }
   };
   useEffect(() => {
+    console.log(formState);
     Object.keys(formState).map((i) => {
       validState.push(formState[i].isValid);
     });
@@ -89,7 +89,7 @@ const SignInPage = () => {
             type="password"
             notValidText="Please enter a password."
             formState={formState}
-            setFormState={setFormState}
+            setFormState="Please enter your username or email address."
           />
           <Button
             name="Create account"

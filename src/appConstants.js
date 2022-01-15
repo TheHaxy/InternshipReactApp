@@ -9,7 +9,7 @@ export const Patterns = {
   ),
 };
 
-export let inputData = {
+export let signinData = {
   firstName: {
     value: "",
     isValid: false,
@@ -27,3 +27,16 @@ export let inputData = {
     isValid: false,
   },
 };
+
+export let loginData = {
+  email: {
+    value: "",
+    isValid: false,
+  },
+  password: {
+    value: "",
+    isValid: false,
+  },
+};
+
+
