@@ -1,5 +1,6 @@
 .main {
     display: flex;
+    flex: 1 0 auto;
     flex-direction: column;
     align-items: center;
     align-self: center;

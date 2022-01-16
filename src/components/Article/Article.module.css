@@ -8,12 +8,14 @@
     gap: 24px;
 }
 
-.articles__img__main_page {
+.article__img__main_page {
     width: 55%;
     height: auto;
 }
 
-.article__info {
+.article__info__main_page {
+    width: 45%;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,8 +87,14 @@
     margin: 40px 0;
 }
 
-.article__img__article_list {
+.article__info__article_list {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
+.article__img__article_list {
 }
 
 .article__subtitle__article_list {

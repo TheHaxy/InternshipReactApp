@@ -22,8 +22,6 @@ const LoginPage = () => {
   const clickLoginBth = (e) => {
     e.preventDefault();
     let thisUser = usersStorage.find(item => item.email === formState.email.value);
-    console.log(thisUser);
-    console.log(formState);
     if (thisUser && formState.password.value === thisUser.password) {
       localStorage.setItem("LOGIN_USER", JSON.stringify(thisUser));
       navigate("/main-page", { replace: true });
@@ -33,7 +31,6 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log(formState);
     Object.keys(formState).map((i) => {
       validState.push(formState[i].isValid);
     });
@@ -73,7 +70,9 @@ const LoginPage = () => {
           <Button
             name="Log in" v
             variant="contained__login"
-            onClick={(e) => {clickLoginBth(e)}}
+            onClick={(e) => {
+              clickLoginBth(e);
+            }}
             isDisable={isDisableBtn}
           />
         </form>

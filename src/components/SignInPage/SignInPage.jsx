@@ -17,7 +17,6 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const validState = [];
   let usersArray = [];
-
   const submitForm = (e) => {
     e.preventDefault();
     if (localStorage.USERS_DATA) {
@@ -35,13 +34,12 @@ const SignInPage = () => {
       localStorage.setItem("LOGIN_USER", JSON.stringify(usersArray.pop()));
       navigate("/main-page", { replace: true });
 
-    } else{
-      localStorage.setItem("USERS_DATA", JSON.stringify(usersArray))
-      setIsDisableBtn(true)
+    } else {
+      localStorage.setItem("USERS_DATA", JSON.stringify(usersArray));
+      setIsDisableBtn(true);
     }
   };
   useEffect(() => {
-    console.log(formState);
     Object.keys(formState).map((i) => {
       validState.push(formState[i].isValid);
     });
@@ -89,7 +87,7 @@ const SignInPage = () => {
             type="password"
             notValidText="Please enter a password."
             formState={formState}
-            setFormState="Please enter your username or email address."
+            setFormState={setFormState}
           />
           <Button
             name="Create account"

@@ -3,6 +3,7 @@
 .footer {
     background: #242424;
     display: flex;
+    flex: 0 0 auto;
     flex-direction: column;
     align-items: center;
     margin-top: 110px;

@@ -28,7 +28,7 @@ const Nav = ({ location }) => {
         ) : (
           <>
             <Link to="/main-page">
-              <Button variant={`nolined__${location}`} name="All articles" />
+              <Button variant={`nolined__${location}`} name="All articles"/>
             </Link>
             <Link to="/main-page">
               <Button variant={`nolined__${location}`} name="My articles" />
