@@ -14,8 +14,8 @@ import SignInPageClasses from "./SignInPage.module.css";
 const SignInPage = () => {
   const [usersStorage, setUsersStorage] = useState([]);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
+  const [inputValue, setInputValue] = useState("")
   const [formState, setFormState] = useState(signinData);
-  console.log(formState);
   const navigate = useNavigate();
   const validState = [];
   const submitForm = (e) => {
@@ -69,6 +69,8 @@ const SignInPage = () => {
             name="firstName"
             type="text"
             notValidText="Please enter a first name."
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             formState={formState}
             setFormState={setFormState}
           />
@@ -77,6 +79,8 @@ const SignInPage = () => {
             name="lastName"
             type="text"
             notValidText="Please enter a last name."
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             formState={formState}
             setFormState={setFormState}
           />
@@ -85,6 +89,8 @@ const SignInPage = () => {
             name="email"
             type="email"
             notValidText="Please enter your username or email address."
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             formState={formState}
             setFormState={setFormState}
           />
@@ -93,6 +99,8 @@ const SignInPage = () => {
             name="password"
             type="password"
             notValidText="Please enter a password."
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             formState={formState}
             setFormState={setFormState}
           />

@@ -15,6 +15,7 @@ import LoginPageClasses from "./LoginPage.module.css";
 const LoginPage = () => {
   const [formState, setFormState] = useState(loginData);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
+  const [inputValue, setInputValue] = useState("")
   const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
   const navigate = useNavigate();
   const validState = [];
@@ -56,6 +57,8 @@ const LoginPage = () => {
             name="email"
             type="email"
             notValidText="Please enter your username or email address."
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             formState={formState}
             setFormState={setFormState}
           />
@@ -64,6 +67,8 @@ const LoginPage = () => {
             name="password"
             type="password"
             notValidText="Please enter a password."
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             formState={formState}
             setFormState={setFormState}
           />
