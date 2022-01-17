@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { signinData } from "../../appConstants";
 import { useNavigate } from "react-router-dom";
+import voidUserImage from "../../assets/Group54.svg";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -11,31 +12,32 @@ import Button from "../UI/Button/Button";
 import SignInPageClasses from "./SignInPage.module.css";
 
 const SignInPage = () => {
-  let usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
+  const [usersStorage, setUsersStorage] = useState([]);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [formState, setFormState] = useState(signinData);
+  console.log(formState);
   const navigate = useNavigate();
   const validState = [];
-  let usersArray = [];
   const submitForm = (e) => {
     e.preventDefault();
-    if (localStorage.USERS_DATA) {
-      usersArray = JSON.parse(localStorage.getItem("USERS_DATA"));
-    }
-    const checkUser = usersStorage.find(item => item.email === formState.email.value);
+    console.log(usersStorage);
+    const checkUser = usersStorage.find(
+      (item) => item.email === formState.email.value
+    );
     if (!checkUser) {
-      usersArray.push({
-        name: `${formState.firstName.value} ${formState.lastName.value}`,
+      const newUser = {
+        firstName: formState.firstName.value,
+        lastName: formState.lastName.value,
         email: formState.email.value,
-        password: formState.password.value
-      });
-      localStorage.setItem("USERS_DATA", JSON.stringify(usersArray));
-      usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
-      localStorage.setItem("LOGIN_USER", JSON.stringify(usersArray.pop()));
+        password: formState.password.value,
+        image: voidUserImage,
+      };
+      usersStorage.push(newUser);
+      localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));
+      localStorage.setItem("LOGIN_USER", JSON.stringify(newUser));
       navigate("/main-page", { replace: true });
-
     } else {
-      localStorage.setItem("USERS_DATA", JSON.stringify(usersArray));
+      localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));
       setIsDisableBtn(true);
     }
   };
@@ -48,6 +50,11 @@ const SignInPage = () => {
       else setIsDisableBtn(false);
     });
   }, [formState]);
+
+  useEffect(() => {
+    if (localStorage.USERS_DATA)
+      setUsersStorage(JSON.parse(localStorage.getItem("USERS_DATA")));
+  });
 
   return (
     <>

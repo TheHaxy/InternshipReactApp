@@ -4,6 +4,7 @@ button {
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 1rem;
     padding: 1rem 2rem;
+    width: fit-content;
 }
 
 button:hover {
@@ -52,6 +53,11 @@ button:hover {
     cursor: default;
 }
 
+.button__contained__header:disabled {
+    opacity: 50%;
+    cursor: default;
+}
+
 .button__nolined__header {
     background: transparent;
     border: none;
@@ -68,7 +74,17 @@ button:hover {
     margin: 0 20px;
 }
 
-.button__active__nolined__header{
+.button__active__nolined__header {
     border-bottom: 2px solid #242424;
     color: rgba(36, 36, 36, 1);
+}
+
+.button__upload {
+    background: transparent;
+    border: 1px solid #242424;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 auto;
 }

@@ -1,4 +1,5 @@
 .input__true {
+    font-size: 1rem;
     padding: 15px 10px;
     width: 100%;
     border: 1px solid #8C8C8C;
@@ -21,6 +22,7 @@
 }
 
 .input__false {
+    font-size: 1rem;
     padding: 15px 10px;
     width: 100%;
     border: 1px solid #CF4949;
@@ -31,7 +33,7 @@
     outline: none;
 }
 
-.input__not__valid__text{
+.input__not__valid__text {
     position: absolute;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.75rem;
