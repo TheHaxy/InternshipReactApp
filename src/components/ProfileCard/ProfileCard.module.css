@@ -1,0 +1,80 @@
+.profile__user__avatar__card {
+    width: 346px;
+    height: 362px;
+    margin: 10px;
+    padding-top: 58px;
+    border: 1px solid #F2F2F2;
+    background: #FBFBFB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.my_articles__user__avatar__card {
+    width: 346px;
+    height: 346px;
+    margin: 10px;
+    padding-top: 58px;
+    border: 1px solid #F2F2F2;
+    background: #FBFBFB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user__avatar__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 126px;
+    height: 126px;
+    border-radius: 50%;
+    background: #E5E5E5;
+    margin-bottom: 32px;
+}
+
+.delete__avatar__text {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 1rem;
+    color: #242424;
+    border-bottom: 1px solid #242424;
+    margin-top: 24px;
+}
+
+.delete__avatar__text:hover {
+    cursor: pointer;
+}
+
+.upload {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.upload__button {
+    position: relative;
+}
+
+.user__name{
+    font-family: "Playfair Display", serif;
+    width: 259px;
+    text-align: center;
+    word-wrap: break-word;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.user__description{
+    font-family: "IBM Plex Sans", sans-serif;
+    width: 259px;
+    word-wrap: break-word;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgba(140, 140, 140, 1);
+}

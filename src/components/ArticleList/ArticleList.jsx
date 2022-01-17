@@ -9,7 +9,7 @@ import { APP_ARTICLES_PAGE } from '../../appConstants'
 
 import articleListClasses from "./ArticleList.module.css";
 
-const ArticleList = () => {
+const ArticleList = ({location}) => {
   const [count, setCount] = useState(0);
 
   const onClickNextButton = useCallback(() => {
@@ -37,7 +37,7 @@ const ArticleList = () => {
                 image={article.img}
                 date={article.date}
                 views={article.views}
-                location={`article_list`}
+                location={`${location}__article`}
                 key={index}
               />
             );

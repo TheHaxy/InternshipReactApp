@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import voidUserImage from "../../assets/Group54.svg";
 
 import ProfileClasses from "./Profile.module.css";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Profile = () => {
   let user = JSON.parse(localStorage.getItem("LOGIN_USER"));
@@ -53,26 +54,7 @@ const Profile = () => {
       <div className={ProfileClasses[`profile__page`]}>
         <h1 className={ProfileClasses[`profile__title`]}>Profile</h1>
         <section className={ProfileClasses.profile}>
-          <div className={ProfileClasses[`user__avatar__card`]}>
-            <div className={ProfileClasses[`user__avatar__container`]}>
-              <img src={userImage} alt="User avatar" />
-            </div>
-            <div className={ProfileClasses[`upload__button`]}>
-              <Button variant="upload" name="Change photo" />
-              <input
-                type="file"
-                accept=".png, .jpg, .jpeg"
-                className={ProfileClasses[`upload`]}
-                onChange={(e) => openFile(e)}
-              />
-            </div>
-            <p
-              className={ProfileClasses[`delete__avatar__text`]}
-              onClick={() => deleteAvatar()}
-            >
-              Delete photo
-            </p>
-          </div>
+          <ProfileCard OnClick={() => deleteAvatar()} OnChange={(e) => openFile(e)} userImage={userImage} location="profile" user={user}/>
           <form className={ProfileClasses[`profile__form`]}>
             <div className={ProfileClasses[`profile__form__input_name`]}>
               <Input

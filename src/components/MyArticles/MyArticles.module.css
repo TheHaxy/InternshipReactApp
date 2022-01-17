@@ -1,0 +1,11 @@
+.article__container{
+    width: 1070px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+.article__content{
+    display: flex;
+}

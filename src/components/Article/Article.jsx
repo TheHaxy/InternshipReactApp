@@ -7,16 +7,16 @@ import articleClasses from "./Article.module.css";
 
 const Article = ({ location, title, subtitle, image, author, date, views }) => {
   return (
-    <div className={articleClasses[`article__${location}`]}>
+    <div className={articleClasses[`${location}__article`]}>
       <img
-        className={articleClasses[`article__img__${location}`]}
+        className={articleClasses[`${location}__article__img`]}
         src={image}
         alt={`Article image`}
       />
-      <section className={articleClasses[`article__info__${location}`]}>
+      <section className={articleClasses[`${location}__article__info`]}>
         <p className={articleClasses[`article__tag`]}>#Typography</p>
         <h1 className={articleClasses[`article__title`]}>{title}</h1>
-        <p className={articleClasses[`article__subtitle__${location}`]}>
+        <p className={articleClasses[`${location}__article__subtitle`]}>
           {subtitle}
         </p>
         <div className={articleClasses[`article__other__info`]}>
