@@ -13,11 +13,11 @@ const Input = ({
   inputValue,
   placeholder,
   setInputValue,
+  location,
 }) => {
   const [isValid, setIsValid] = useState(true);
-  console.log(inputValue);
   const newInputValue = (e) => {
-    if (formState) {
+    if (formState && !inputValue) {
       setFormState({
         ...formState,
         [name]: {

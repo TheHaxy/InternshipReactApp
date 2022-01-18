@@ -11,8 +11,11 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
 const AddArticle = () => {
-  const [isDisableBth, setIsDisableBth] = useState(true);
-  const [inputValue, setInputValue] = useState("");
+  const [isDisableBth, setIsDisableBth] = useState(false);
+  const [inputValue, setInputValue] = useState({
+    title: "",
+    subtitle: "",
+  });
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -26,7 +29,20 @@ const AddArticle = () => {
     setConvertedContent(currentContentAsHTML);
   };
 
-  const clickSubmitBth = (e) => {};
+  const clickSubmitBth = () => {
+    const selection = editorState.getSelection();
+    const anchorKey = selection.getAnchorKey();
+    const currentContent = editorState.getCurrentContent();
+    const currentBlock = currentContent.getBlockForKey(anchorKey);
+    const end = selection.getEndOffset();
+    const selectedImage = currentBlock.getCharacterList().get(2)
+    const selectedText = currentBlock.getText().slice(0, end);
+    console.log(currentContent.getBlockForKey("9pgtn"));
+  };
+
+  const editorChange = () => {
+
+  };
   return (
     <>
       <Header />
@@ -53,13 +69,15 @@ const AddArticle = () => {
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
             placeholder="Enter the text..."
+            editorState={editorState}
+            onChange={() => editorChange()}
           />
         </div>
         <Button
           name="Publish an article"
           variant="contained__header"
-          onClick={(e) => {
-            clickSubmitBth(e);
+          onClick={() => {
+            clickSubmitBth();
           }}
           isDisable={isDisableBth}
         />
