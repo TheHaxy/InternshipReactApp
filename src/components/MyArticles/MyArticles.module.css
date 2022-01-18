@@ -1,11 +1,7 @@
-.article__container{
+.article__container {
     width: 1070px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
     align-self: center;
-}
-
-.article__content{
-    display: flex;
+    gap: 40px;
 }

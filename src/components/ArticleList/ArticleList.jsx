@@ -5,43 +5,66 @@ import Button from "../UI/Button/Button";
 
 import articles from "../../mockdata/articleData";
 
-import { APP_ARTICLES_PAGE } from '../../appConstants'
+import { APP_ARTICLES_PAGE } from "../../appConstants";
 
 import articleListClasses from "./ArticleList.module.css";
 
-const ArticleList = ({location}) => {
+const ArticleList = ({ location }) => {
   const [count, setCount] = useState(0);
 
   const onClickNextButton = useCallback(() => {
-    setCount(count  => count + 1);
+    setCount((count) => count + 1);
   }, []);
 
   const onClickPrevButton = useCallback(() => {
-    setCount(count => count - 1);
+    setCount((count) => count - 1);
   }, []);
 
   return (
-    <section className={articleListClasses[`article__list`]}>
-      <h1 className={articleListClasses[`article__list__title`]}>
-        Popular articles
-      </h1>
+    <section className={articleListClasses[`${location}__article__list`]}>
+      {location === "article_list" && (
+        <h1 className={articleListClasses[`article__list__title`]}>
+          Popular articles
+        </h1>
+      )}
       <div>
-        {articles
-          .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
-          .map((article, index) => {
-            return (
-              <Article
-                title={article.title}
-                subtitle={article.subtitle}
-                author={article.author}
-                image={article.img}
-                date={article.date}
-                views={article.views}
-                location={`${location}__article`}
-                key={index}
-              />
-            );
-          })}
+        {location === "my_articles"
+          ? articles
+              .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
+              .map((article, index) => {
+                if (
+                  article.email === JSON.parse(localStorage.LOGIN_USER).email
+                ) {
+                  return (
+                    <Article
+                      title={article.title}
+                      subtitle={article.subtitle}
+                      author={article.author}
+                      image={article.img}
+                      date={article.date}
+                      views={article.views}
+                      location={location}
+                      key={index}
+                    />
+                  );
+                }
+              })
+          : articles
+              .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
+              .map((article, index) => {
+                return (
+                  <Article
+                    title={article.title}
+                    subtitle={article.subtitle}
+                    author={article.author}
+                    image={article.img}
+                    date={article.date}
+                    views={article.views}
+                    location={location}
+                    key={index}
+                  />
+                );
+              })}
       </div>
       <div className={articleListClasses[`article__list__nav__button`]}>
         <Button

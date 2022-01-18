@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
-.article__list{
-    margin: 96px 0 0 0 ;
+.article_list__article__list {
+    margin: 96px 0 0 0;
 }
 
-.article__list__title{
+.my_articles__article__list {
+    margin: 0;
+}
+
+.article__list__title {
     font-family: 'Playfair Display', serif;
     font-size: 48px;
     line-height: 48px;
     margin: 0 0 56px 0;
 }
 
-.article__list__nav__button{
+.article__list__nav__button {
     margin: 56px 0 0 0;
     display: flex;
     justify-content: space-between;

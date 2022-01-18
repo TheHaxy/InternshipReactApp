@@ -14,7 +14,7 @@ import SignInPageClasses from "./SignInPage.module.css";
 const SignInPage = () => {
   const [usersStorage, setUsersStorage] = useState([]);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState("");
   const [formState, setFormState] = useState(signinData);
   const navigate = useNavigate();
   const validState = [];
@@ -59,7 +59,7 @@ const SignInPage = () => {
   return (
     <>
       <Header />
-      <div className={SignInPageClasses["signing__page"]}>
+      <main className={SignInPageClasses["signing__page"]}>
         <h1 className={SignInPageClasses["signing__title"]}>
           Create your free account
         </h1>
@@ -111,7 +111,7 @@ const SignInPage = () => {
             onClick={(e) => submitForm(e)}
           />
         </form>
-      </div>
+      </main>
       <Footer />
     </>
   );

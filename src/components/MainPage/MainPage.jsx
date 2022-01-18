@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import articles from "../../mockdata/articleData";
 
@@ -10,10 +10,12 @@ import Footer from "../Footer/Footer";
 import mainClasses from "./MainPage.module.css";
 
 const MainPage = () => {
-  let popularArticle = articles.reduce((prev, curr) => {
-    if (prev.views > curr.views) return prev;
-    else return curr;
-  });
+  const popularArticle = useMemo(() => {
+    return articles.reduce((prev, curr) => {
+      if (prev.views > curr.views) return prev;
+      else return curr;
+    });
+  }, [articles]);
   return (
     <>
       <Header />
@@ -27,7 +29,7 @@ const MainPage = () => {
           views={popularArticle.views}
           date={popularArticle.date}
         />
-        <ArticleList location="article_list"/>
+        <ArticleList location="article_list" />
       </main>
       <Footer />
     </>

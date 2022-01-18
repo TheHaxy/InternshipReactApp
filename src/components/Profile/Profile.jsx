@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
@@ -11,7 +11,7 @@ import ProfileClasses from "./Profile.module.css";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Profile = () => {
-  let user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+  const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
   const [userImage, setUserImage] = useState(user.image);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [inputValue, setInputValue] = useState({
@@ -51,10 +51,16 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <div className={ProfileClasses[`profile__page`]}>
+      <main className={ProfileClasses[`profile__page`]}>
         <h1 className={ProfileClasses[`profile__title`]}>Profile</h1>
         <section className={ProfileClasses.profile}>
-          <ProfileCard OnClick={() => deleteAvatar()} OnChange={(e) => openFile(e)} userImage={userImage} location="profile" user={user}/>
+          <ProfileCard
+            OnClick={() => deleteAvatar()}
+            OnChange={(e) => openFile(e)}
+            userImage={userImage}
+            location="profile"
+            user={user}
+          />
           <form className={ProfileClasses[`profile__form`]}>
             <div className={ProfileClasses[`profile__form__input_name`]}>
               <Input
@@ -86,7 +92,7 @@ const Profile = () => {
             />
           </form>
         </section>
-      </div>
+      </main>
       <Footer />
     </>
   );

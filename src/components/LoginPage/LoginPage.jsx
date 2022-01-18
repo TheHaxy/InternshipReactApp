@@ -15,14 +15,16 @@ import LoginPageClasses from "./LoginPage.module.css";
 const LoginPage = () => {
   const [formState, setFormState] = useState(loginData);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState("");
   const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
   const navigate = useNavigate();
   const validState = [];
 
   const clickLoginBth = (e) => {
     e.preventDefault();
-    let thisUser = usersStorage.find(item => item.email === formState.email.value);
+    const thisUser = usersStorage.find(
+      (item) => item.email === formState.email.value
+    );
     if (thisUser && formState.password.value === thisUser.password) {
       localStorage.setItem("LOGIN_USER", JSON.stringify(thisUser));
       navigate("/main-page", { replace: true });
@@ -44,14 +46,11 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-      <div className={LoginPageClasses["login__page"]}>
+      <main className={LoginPageClasses["login__page"]}>
         <h1 className={LoginPageClasses["login__title"]}>
           Log in to your account
         </h1>
-        <form
-          noValidate={true}
-          className={LoginPageClasses[`login__form`]}
-        >
+        <form noValidate={true} className={LoginPageClasses[`login__form`]}>
           <Input
             text="Email Address"
             name="email"
@@ -73,7 +72,8 @@ const LoginPage = () => {
             setFormState={setFormState}
           />
           <Button
-            name="Log in" v
+            name="Log in"
+            v
             variant="contained__login"
             onClick={(e) => {
               clickLoginBth(e);
@@ -87,7 +87,7 @@ const LoginPage = () => {
             <span>Create one</span>
           </Link>
         </p>
-      </div>
+      </main>
       <Footer />
     </>
   );

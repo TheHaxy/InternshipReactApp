@@ -1,10 +1,12 @@
-import ButtonClasses from "./Button.module.css";
+import ButtonClasses from "./Button.module.scss";
 import React from "react";
 
 const Button = ({ name, isDisable, variant, onClick }) => {
   return (
     <button
-      className={ButtonClasses[`button__${variant}`]}
+      className={`${ButtonClasses[`button`]} ${
+        ButtonClasses[`button__${variant}`]
+      }`}
       onClick={onClick}
       disabled={isDisable}
     >

@@ -1,5 +1,5 @@
 import React from "react";
-import navClasses from "./Nav.module.css";
+import navClasses from "./Nav.module.scss";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import Button from "../UI/Button/Button";
 import { Link } from "react-router-dom";
@@ -32,7 +32,7 @@ const Nav = ({ location }) => {
             <Link to="/my-articles">
               <Button variant={`nolined__${location}`} name="My articles" />
             </Link>
-            <Link to="/main-page">
+            <Link to="/add-article">
               <Button variant={`nolined__${location}`} name="Add article" />
             </Link>
             <Link to="/profile" style={{ marginRight: "50px" }}>

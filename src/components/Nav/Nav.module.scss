@@ -1,0 +1,42 @@
+@mixin nav {
+  margin: 0 10px;
+  width: 1070px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.header__logo, header a {
+  align-self: center;
+}
+
+.header__logo:hover {
+  cursor: pointer;
+}
+
+.footer__logo, .footer__nav a {
+  align-self: center;
+  fill: #EBEBEB;
+}
+
+.footer__logo:hover {
+  cursor: pointer;
+}
+
+
+.header__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.header__nav {
+  @include nav;
+  padding: 24px 0;
+}
+
+.footer__nav {
+  @include nav;
+  padding: 64px 0;
+}

@@ -11,9 +11,9 @@
 }
 
 .my_articles__user__avatar__card {
-    width: 346px;
-    height: 346px;
-    margin: 10px;
+    width: 100%;
+    max-width: 366px;
+    height: 366px;
     padding-top: 58px;
     border: 1px solid #F2F2F2;
     background: #FBFBFB;
@@ -58,7 +58,7 @@
     position: relative;
 }
 
-.user__name{
+.user__name {
     font-family: "Playfair Display", serif;
     width: 259px;
     text-align: center;
@@ -69,7 +69,7 @@
     margin-bottom: 16px;
 }
 
-.user__description{
+.user__description {
     font-family: "IBM Plex Sans", sans-serif;
     width: 259px;
     word-wrap: break-word;
