@@ -14,6 +14,7 @@ const Input = ({
   setInputValue,
 }) => {
   const [isValid, setIsValid] = useState(true);
+  console.log(inputValue);
   const newInputValue = (e) => {
     if (formState) {
       setFormState({

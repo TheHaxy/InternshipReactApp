@@ -27,7 +27,7 @@ const MainPage = () => {
           views={popularArticle.views}
           date={popularArticle.date}
         />
-        <ArticleList />
+        <ArticleList location="article_list"/>
       </main>
       <Footer />
     </>

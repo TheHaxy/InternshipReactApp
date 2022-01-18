@@ -15,17 +15,6 @@
     gap: 40px;
 }
 
-.user__avatar__card {
-    width: 346px;
-    height: 362px;
-    margin: 10px;
-    padding-top: 58px;
-    border: 1px solid #F2F2F2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .profile__form__input_name {
     display: flex;
     gap: 32px;
@@ -34,29 +23,6 @@
 .profile__form {
     display: flex;
     flex-direction: column;
-}
-
-.user__avatar__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 126px;
-    height: 126px;
-    border-radius: 50%;
-    background: #E5E5E5;
-    margin-bottom: 32px;
-}
-
-.delete__avatar__text {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 1rem;
-    color: #242424;
-    border-bottom: 1px solid #242424;
-    margin-top: 24px;
-}
-
-.delete__avatar__text:hover {
-    cursor: pointer;
 }
 
 .textarea {
@@ -77,17 +43,4 @@
 .textarea:active, .textarea:hover, .textarea:focus {
     border: 1px solid #8C8C8C;
     outline: none;
-}
-
-.upload {
-    top: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.upload__button {
-    position: relative;
 }
