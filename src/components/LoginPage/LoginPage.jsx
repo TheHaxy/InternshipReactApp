@@ -41,7 +41,7 @@ const LoginPage = () => {
       if (validState.filter((state) => !state).length) setIsDisableBtn(true);
       else setIsDisableBtn(false);
     });
-  }, [formState]);
+  }, [validState, formState]);
 
   return (
     <>
@@ -73,7 +73,6 @@ const LoginPage = () => {
           />
           <Button
             name="Log in"
-            v
             variant="contained__login"
             onClick={(e) => {
               clickLoginBth(e);

@@ -1,0 +1,22 @@
+.editor__section {
+    display: flex;
+    flex-direction: column;
+    width: 1070px;
+    align-self: center;
+}
+
+.editor {
+    font-family: "IBM Plex Sans", sans-serif;
+    border: 1px solid #8C8C8C;
+    min-height: 335px;
+    margin-bottom: 48px;
+}
+
+.title {
+    font-family: "Playfair Display", sans-serif;
+    color: #242424;
+    font-size: 3.5rem;
+    line-height: 3.5rem;
+    margin-bottom: 64px;
+}
+
