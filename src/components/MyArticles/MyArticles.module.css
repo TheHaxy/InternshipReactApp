@@ -5,3 +5,15 @@
     align-self: center;
     gap: 40px;
 }
+
+.articles__undefined{
+    font-family: "Playfair Display", serif;
+    font-size: 3em;
+    line-height: 2.5em;
+}
+
+.not__found__section{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

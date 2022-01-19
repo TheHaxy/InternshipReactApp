@@ -7,3 +7,9 @@
     margin: 0 10px;
     max-width: 1070px;
 }
+
+.articles__undefined{
+    font-family: "Playfair Display", serif;
+    font-size: 3em;
+    line-height: 2.5em;
+}

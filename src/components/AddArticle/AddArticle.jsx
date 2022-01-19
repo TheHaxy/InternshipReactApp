@@ -12,25 +12,28 @@ import Button from "../UI/Button/Button";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import AddArticleClasses from "./AddArticle.module.css";
 
-const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
-
 const AddArticle = () => {
+  const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+  const navigate = useNavigate();
   const [articlesStorage, setArticlesStorage] = useState([]);
   const [isDisableBth, setIsDisableBth] = useState(false);
+  const [newImage, setNewImage] = useState("");
   const [inputValue, setInputValue] = useState({
     title: "",
     subtitle: "",
   });
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
-  );
-  const [newImage, setNewImage] = useState("");
-  const navigate = useNavigate();
+  )
 
   useEffect(() => {
     if (localStorage.ARTICLES_STORAGE)
       setArticlesStorage(JSON.parse(localStorage.getItem("ARTICLES_STORAGE")));
   }, []);
+
+  useEffect(() => {
+    if (!localStorage.LOGIN_USER) navigate("/login", { replace: true })
+  }, [localStorage.LOGIN_USER])
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -48,7 +51,7 @@ const AddArticle = () => {
       title: inputValue.title,
       category: inputValue.subtitle,
       text: selectedText,
-      image: `../../assets/${newImage}`,
+      image: newImage,
       author: `${user.firstName} ${user.lastName}`,
       email: user.email,
       date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
@@ -61,7 +64,8 @@ const AddArticle = () => {
   };
 
   const openImage = (e) => {
-    setNewImage(e.target.value.substring(12));
+    setNewImage(btoa(e.target.files[0]));
+    console.log(e.target.files[0].webkitRelativePath);
   };
 
   return (

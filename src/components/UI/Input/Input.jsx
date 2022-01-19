@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Patterns } from "../../../appConstants";
+import { Patterns } from "../../../mockdata/appConstants";
 
 import InputClasses from "./Input.module.css";
 
@@ -14,7 +14,6 @@ const Input = ({
   inputValue,
   placeholder,
   setInputValue,
-  location,
 }) => {
   const [isValid, setIsValid] = useState(true);
   const newInputValue = (e) => {

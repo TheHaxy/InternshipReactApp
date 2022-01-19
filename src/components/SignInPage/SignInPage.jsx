@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { signinData } from "../../appConstants";
+import { signinData } from "../../mockdata/appConstants";
 import { useNavigate } from "react-router-dom";
 import voidUserImage from "../../assets/Group54.svg";
 
@@ -18,12 +18,31 @@ const SignInPage = () => {
   const [formState, setFormState] = useState(signinData);
   const navigate = useNavigate();
   const validState = [];
+
+  useEffect(() => {
+    Object.keys(formState).map((i) => {
+      validState.push(formState[i].isValid);
+    });
+    Object.keys(validState).map((i) => {
+      if (validState.filter((state) => !state).length) setIsDisableBtn(true);
+      else setIsDisableBtn(false);
+    });
+  }, [formState]);
+
+  useEffect(() => {
+    if (localStorage.USERS_DATA)
+      setUsersStorage(JSON.parse(localStorage.getItem("USERS_DATA")));
+  });
+
+  useEffect(() => {
+    if (localStorage.LOGIN_USER) navigate("/main-page", { replace: true })
+  }, [localStorage.LOGIN_USER])
+
   const submitForm = (e) => {
     e.preventDefault();
     console.log(usersStorage);
     const checkUser = usersStorage.find(
-      (item) => item.email === formState.email.value
-    );
+      (item) => item.email === formState.email.value);
     if (!checkUser) {
       const newUser = {
         firstName: formState.firstName.value,
@@ -41,20 +60,6 @@ const SignInPage = () => {
       setIsDisableBtn(true);
     }
   };
-  useEffect(() => {
-    Object.keys(formState).map((i) => {
-      validState.push(formState[i].isValid);
-    });
-    Object.keys(validState).map((i) => {
-      if (validState.filter((state) => !state).length) setIsDisableBtn(true);
-      else setIsDisableBtn(false);
-    });
-  }, [formState]);
-
-  useEffect(() => {
-    if (localStorage.USERS_DATA)
-      setUsersStorage(JSON.parse(localStorage.getItem("USERS_DATA")));
-  });
 
   return (
     <>

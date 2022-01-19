@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import MyArticleClasses from "./MyArticles.module.css";
 
@@ -9,6 +11,12 @@ import ArticleList from "../ArticleList/ArticleList";
 
 const MyArticles = () => {
   const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!localStorage.LOGIN_USER) navigate("/main-page", { replace: true })
+  }, [localStorage.LOGIN_USER])
+
   return (
     <>
       <Header />
@@ -19,10 +27,15 @@ const MyArticles = () => {
           user={user}
           location="my_articles"
         />
-        <ArticleList
-          className={MyArticleClasses[`article__list`]}
-          location="my_articles"
-        />
+        {localStorage.ARTICLES_STORAGE ?
+          <ArticleList
+            className={MyArticleClasses[`article__list`]}
+            location="my_articles"
+          />
+          : <section className={MyArticleClasses[`not__found__section`]}>
+            <h1 className={MyArticleClasses[`articles__undefined`]}>Articles not found...</h1>\
+          </section>
+        }
       </main>
       <Footer />
     </>

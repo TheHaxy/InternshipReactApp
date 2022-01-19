@@ -47,6 +47,8 @@
 
 .author__img {
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
 .article__title {
@@ -123,6 +125,10 @@
     flex-direction: column;
     gap: 24px;
     margin: 40px 0;
+}
+
+.my_articles__article:hover {
+    cursor: pointer;
 }
 
 .my_articles__article:nth-child(1) {

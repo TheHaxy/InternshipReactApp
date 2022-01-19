@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import Header from "../Header/Header";
@@ -11,8 +13,9 @@ import ProfileClasses from "./Profile.module.css";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Profile = () => {
-  const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
   const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
+  const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+  const navigate = useNavigate()
   const [userImage, setUserImage] = useState(user.image);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [inputValue, setInputValue] = useState({
@@ -20,6 +23,19 @@ const Profile = () => {
     lastName: user.lastName,
     description: user.description,
   });
+
+  useEffect(() => {
+    if (inputValue) setIsDisableBtn(false);
+  }, [inputValue]);
+
+  useEffect(() => {
+    if (!localStorage.LOGIN_USER) navigate("/main-page", { replace: true })
+  }, [localStorage.LOGIN_USER])
+
+  const editTextarea = (e) => {
+    setInputValue({ ...inputValue, description: e.target.value });
+  };
+
   const deleteAvatar = () => {
     setUserImage(voidUserImage);
     setIsDisableBtn(false);
@@ -36,18 +52,16 @@ const Profile = () => {
     user.firstName = inputValue.firstName;
     user.lastName = inputValue.lastName;
     user.description = inputValue.description;
-    console.log(user);
-    localStorage.setItem("LOGIN_USER", JSON.stringify(user));
-    // const prevUserData = usersStorage.find((item) => item.email === user.email);
     setIsDisableBtn(true);
-  };
-
-  useEffect(() => {
-    if (inputValue) setIsDisableBtn(false);
-  }, [inputValue]);
-
-  const editTextarea = (e) => {
-    setInputValue({ ...inputValue, description: e.target.value });
+    usersStorage.map((item) => {return item.email === user.email && [
+      item.firstName = user.firstName,
+      item.lastName = user.lastName,
+      item.description = user.description,
+      item.image = user.image,
+    ]
+    })
+    localStorage.setItem("LOGIN_USER", JSON.stringify(user));
+    localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));
   };
 
   return (

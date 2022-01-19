@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -9,11 +9,12 @@ import Footer from "../Footer/Footer";
 
 import ArticlePageClasses from "./ArticlePage.module.css";
 
-const articlesStorage = JSON.parse(localStorage.getItem("ARTICLES_STORAGE"));
 
 const ArticlePage = () => {
+  const articlesStorage = JSON.parse(localStorage.getItem("ARTICLES_STORAGE"));
   const navigate = useNavigate();
   const location = useLocation();
+
   const thisArticle = articlesStorage.find(
     (el) => `#${el.id}` === location.hash
   );

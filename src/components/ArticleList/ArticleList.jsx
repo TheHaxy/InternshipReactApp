@@ -1,15 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import Article from "../Article/Article";
 import Button from "../UI/Button/Button";
-import { APP_ARTICLES_PAGE } from "../../appConstants";
+import { APP_ARTICLES_PAGE } from "../../mockdata/appConstants";
 
 import articleListClasses from "./ArticleList.module.css";
 
-const articlesStorage = JSON.parse(localStorage.getItem("ARTICLES_STORAGE"));
-
 const ArticleList = ({ location }) => {
   const [count, setCount] = useState(0);
+  const [articlesStorage, setArticlesStorage] = useState(JSON.parse(localStorage.getItem("ARTICLES_STORAGE")))
 
   const onClickNextButton = useCallback(() => {
     setCount((count) => count + 1);
@@ -36,12 +35,12 @@ const ArticleList = ({ location }) => {
       )}
       <div>
         {location === "my_articles"
-          ? findMyArticles
+          ? findMyArticles.reverse()
               .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
               .map((myArticle) => {
-                return <Article location={location} article={myArticle} />;
+                return <Article location={location} article={myArticle}/>;
               })
-          : articlesStorage
+          : articlesStorage.reverse()
               .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
               .map((article) => {
                 return <Article article={article} location={location} />;
