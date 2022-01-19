@@ -1,13 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import Article from "../Article/Article";
 import Button from "../UI/Button/Button";
-
-import articles from "../../mockdata/articleData";
-
 import { APP_ARTICLES_PAGE } from "../../appConstants";
 
 import articleListClasses from "./ArticleList.module.css";
+
+const articlesStorage = JSON.parse(localStorage.getItem("ARTICLES_STORAGE"));
 
 const ArticleList = ({ location }) => {
   const [count, setCount] = useState(0);
@@ -20,6 +19,14 @@ const ArticleList = ({ location }) => {
     setCount((count) => count - 1);
   }, []);
 
+  const findMyArticles = useMemo(() => {
+    if (location === "my_articles") {
+      return articlesStorage.filter((article) => {
+        return article.email === JSON.parse(localStorage.LOGIN_USER).email;
+      });
+    }
+  }, [articlesStorage, location, localStorage.LOGIN_USER]);
+
   return (
     <section className={articleListClasses[`${location}__article__list`]}>
       {location === "article_list" && (
@@ -29,41 +36,15 @@ const ArticleList = ({ location }) => {
       )}
       <div>
         {location === "my_articles"
-          ? articles
+          ? findMyArticles
               .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
-              .map((article, index) => {
-                if (
-                  article.email === JSON.parse(localStorage.LOGIN_USER).email
-                ) {
-                  return (
-                    <Article
-                      title={article.title}
-                      subtitle={article.subtitle}
-                      author={article.author}
-                      image={article.img}
-                      date={article.date}
-                      views={article.views}
-                      location={location}
-                      key={index}
-                    />
-                  );
-                }
+              .map((myArticle) => {
+                return <Article location={location} article={myArticle} />;
               })
-          : articles
+          : articlesStorage
               .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
-              .map((article, index) => {
-                return (
-                  <Article
-                    title={article.title}
-                    subtitle={article.subtitle}
-                    author={article.author}
-                    image={article.img}
-                    date={article.date}
-                    views={article.views}
-                    location={location}
-                    key={index}
-                  />
-                );
+              .map((article) => {
+                return <Article article={article} location={location} />;
               })}
       </div>
       <div className={articleListClasses[`article__list__nav__button`]}>
@@ -73,12 +54,27 @@ const ArticleList = ({ location }) => {
           onClick={onClickPrevButton}
           isDisable={!(count * APP_ARTICLES_PAGE >= APP_ARTICLES_PAGE)}
         />
-        <Button
-          variant={`outlined__header`}
-          name="Next"
-          onClick={onClickNextButton}
-          isDisable={count * APP_ARTICLES_PAGE >= articles.length - 1}
-        />
+        {location === "my_articles" ? (
+          <Button
+            variant={`outlined__header`}
+            name="Next"
+            onClick={onClickNextButton}
+            isDisable={
+              (count === 0 && findMyArticles.length < 7) ||
+              count * APP_ARTICLES_PAGE >= findMyArticles.length - 1
+            }
+          />
+        ) : (
+          <Button
+            variant={`outlined__header`}
+            name="Next"
+            onClick={onClickNextButton}
+            isDisable={
+              (count === 0 && articlesStorage.length < 7) ||
+              count * APP_ARTICLES_PAGE >= articlesStorage.length - 1
+            }
+          />
+        )}
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import MainPage from "./components/MainPage/MainPage";
@@ -8,6 +9,7 @@ import MyArticles from "./components/MyArticles/MyArticles";
 import AddArticle from "./components/AddArticle/AddArticle";
 
 import "./App.css";
+import ArticlePage from "./components/ArticlePage/ArticlePage";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/my-articles" element={<MyArticles />} />
         <Route path="/add-article" element={<AddArticle />} />
+        <Route path="/article-page" element={<ArticlePage />} />
       </Routes>
     </div>
   );

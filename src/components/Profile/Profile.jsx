@@ -12,6 +12,7 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Profile = () => {
   const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+  const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
   const [userImage, setUserImage] = useState(user.image);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [inputValue, setInputValue] = useState({
@@ -37,6 +38,7 @@ const Profile = () => {
     user.description = inputValue.description;
     console.log(user);
     localStorage.setItem("LOGIN_USER", JSON.stringify(user));
+    // const prevUserData = usersStorage.find((item) => item.email === user.email);
     setIsDisableBtn(true);
   };
 

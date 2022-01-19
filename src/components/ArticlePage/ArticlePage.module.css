@@ -1,0 +1,6 @@
+.article__page {
+    display: flex;
+    width: 1070px;
+    align-self: center;
+    gap: 73px;
+}

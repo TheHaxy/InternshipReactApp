@@ -7,7 +7,6 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-
 import { loginData } from "../../appConstants";
 
 import LoginPageClasses from "./LoginPage.module.css";

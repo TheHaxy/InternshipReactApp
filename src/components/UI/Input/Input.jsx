@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import InputClasses from "./Input.module.css";
 import { Patterns } from "../../../appConstants";
+
+import InputClasses from "./Input.module.css";
 
 const Input = ({
   text,

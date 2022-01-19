@@ -1,8 +1,8 @@
 import React from "react";
 
-import ProfileClasses from "./ProfileCard.module.css";
 import Button from "../UI/Button/Button";
 
+import ProfileClasses from "./ProfileCard.module.css";
 
 const ProfileCard = ({ userImage, OnChange, OnClick, location, user }) => {
   return (
@@ -28,10 +28,15 @@ const ProfileCard = ({ userImage, OnChange, OnClick, location, user }) => {
           >
             Delete photo
           </p>
-        </>) : (
+        </>
+      ) : (
         <>
-          <p className={ProfileClasses[`user__name`]}>{user.firstName} {user.lastName}</p>
-          <p className={ProfileClasses[`user__description`]}>{user.description}</p>
+          <p className={ProfileClasses[`user__name`]}>
+            {user.firstName} {user.lastName}
+          </p>
+          <p className={ProfileClasses[`user__description`]}>
+            {user.description}
+          </p>
         </>
       )}
     </div>

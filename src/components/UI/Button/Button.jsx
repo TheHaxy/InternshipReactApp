@@ -1,4 +1,5 @@
 import ButtonClasses from "./Button.module.scss";
+
 import React from "react";
 
 const Button = ({ name, isDisable, variant, onClick }) => {

@@ -1,8 +1,11 @@
 import React from "react";
+
+import { Link } from "react-router-dom";
+
+import Button from "../UI/Button/Button";
+
 import navClasses from "./Nav.module.scss";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
-import Button from "../UI/Button/Button";
-import { Link } from "react-router-dom";
 
 const Nav = ({ location }) => {
   return (

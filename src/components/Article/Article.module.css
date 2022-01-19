@@ -4,6 +4,10 @@
     gap: 24px;
 }
 
+.main_page__article:hover {
+    cursor: pointer;
+}
+
 .main_page__article__img {
     width: 582px;
     height: auto;
@@ -67,11 +71,13 @@
 
 .main_page__article__subtitle {
     font-family: IBM Plex Sans, sans-serif;
+    height: 156px;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.62rem;
     color: #8C8C8C;
     margin-bottom: 29px;
+    overflow: hidden;
 }
 
 /*ArticleList classes*/
@@ -83,7 +89,12 @@
     margin: 40px 0;
 }
 
+.article_list__article:hover {
+    cursor: pointer;
+}
+
 .article_list__article__info {
+    width: 680px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -119,6 +130,7 @@
 }
 
 .my_articles__article__info {
+    max-width: 664px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -138,4 +150,33 @@
     line-height: 1.62rem;
     color: #8C8C8C;
     margin-bottom: 24px;
+}
+
+/*Article Page Classes*/
+
+.article_page__article__info {
+    width: 676px;
+    display: flex;
+    flex-direction: column;
+}
+
+.article_page__article__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-bottom: 32px;
+}
+
+.article_page__article__img {
+    margin-bottom: 32px;
+}
+
+.article_page__article__subtitle {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.625rem;
+    color: #8C8C8C;
+    margin-bottom: 48px;
+
 }

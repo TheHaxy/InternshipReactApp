@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import { convertToHTML } from "draft-convert";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useNavigate } from "react-router-dom";
 
-import AddArticleClasses from "./AddArticle.module.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import AddArticleClasses from "./AddArticle.module.css";
+
+const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+
 const AddArticle = () => {
+  const [articlesStorage, setArticlesStorage] = useState([]);
   const [isDisableBth, setIsDisableBth] = useState(false);
   const [inputValue, setInputValue] = useState({
     title: "",
@@ -19,14 +24,16 @@ const AddArticle = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [convertedContent, setConvertedContent] = useState(null);
+  const [newImage, setNewImage] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.ARTICLES_STORAGE)
+      setArticlesStorage(JSON.parse(localStorage.getItem("ARTICLES_STORAGE")));
+  }, []);
+
   const handleEditorChange = (state) => {
     setEditorState(state);
-    convertContentToHTML();
-  };
-  const convertContentToHTML = () => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(currentContentAsHTML);
   };
 
   const clickSubmitBth = () => {
@@ -35,14 +42,28 @@ const AddArticle = () => {
     const currentContent = editorState.getCurrentContent();
     const currentBlock = currentContent.getBlockForKey(anchorKey);
     const end = selection.getEndOffset();
-    const selectedImage = currentBlock.getCharacterList().get(2)
     const selectedText = currentBlock.getText().slice(0, end);
-    console.log(currentContent.getBlockForKey("9pgtn"));
+
+    const newArticle = {
+      title: inputValue.title,
+      category: inputValue.subtitle,
+      text: selectedText,
+      image: `../../assets/${newImage}`,
+      author: `${user.firstName} ${user.lastName}`,
+      email: user.email,
+      date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
+      views: 0,
+      id: articlesStorage.length,
+    };
+    articlesStorage.push(newArticle);
+    localStorage.setItem("ARTICLES_STORAGE", JSON.stringify(articlesStorage));
+    navigate("/main-page", { replace: true });
   };
 
-  const editorChange = () => {
-
+  const openImage = (e) => {
+    setNewImage(e.target.value.substring(12));
   };
+
   return (
     <>
       <Header />
@@ -70,17 +91,27 @@ const AddArticle = () => {
             toolbarClassName="toolbar-class"
             placeholder="Enter the text..."
             editorState={editorState}
-            onChange={() => editorChange()}
           />
         </div>
-        <Button
-          name="Publish an article"
-          variant="contained__header"
-          onClick={() => {
-            clickSubmitBth();
-          }}
-          isDisable={isDisableBth}
-        />
+        <div className={AddArticleClasses.buttons}>
+          <Button
+            name="Publish an article"
+            variant="contained__header"
+            onClick={() => {
+              clickSubmitBth();
+            }}
+            isDisable={isDisableBth}
+          />
+          <div className={AddArticleClasses[`upload__button`]}>
+            <Button variant="upload" name="Upload image" />
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              className={AddArticleClasses[`upload`]}
+              onChange={(e) => openImage(e)}
+            />
+          </div>
+        </div>
       </main>
       <Footer />
     </>
