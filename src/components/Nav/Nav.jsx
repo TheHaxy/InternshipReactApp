@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import Button from "../UI/Button/Button";
 
@@ -29,18 +29,47 @@ const Nav = ({ location }) => {
           </>
         ) : (
           <>
-            <Link to="/main-page">
-              <Button variant={`nolined__${location}`} name="All articles" />
-            </Link>
-            <Link to="/my-articles">
-              <Button variant={`nolined__${location}`} name="My articles" />
-            </Link>
-            <Link to="/add-article">
-              <Button variant={`nolined__${location}`} name="Add article" />
-            </Link>
-            <Link to="/profile" style={{ marginRight: "50px" }}>
-              <Button variant={`nolined__${location}`} name="Profile" />
-            </Link>
+            <NavLink
+              to="/main-page"
+              className={({ isActive }) =>
+                isActive
+                  ? navClasses[`active__link__${location}`]
+                  : navClasses[`inactive__link__${location}`]
+              }
+            >
+              All articles
+            </NavLink>
+            <NavLink
+              to="/my-articles"
+              className={({ isActive }) =>
+                isActive
+                  ? navClasses[`active__link__${location}`]
+                  : navClasses[`inactive__link__${location}`]
+              }
+            >
+              My articles
+            </NavLink>
+            <NavLink
+              to="/add-article"
+              className={({ isActive }) =>
+                isActive
+                  ? navClasses[`active__link__${location}`]
+                  : navClasses[`inactive__link__${location}`]
+              }
+            >
+              Add article
+            </NavLink>
+            <NavLink
+              to="/profile"
+              style={{ marginRight: "50px" }}
+              className={({ isActive }) =>
+                isActive
+                  ? navClasses[`active__link__${location}`]
+                  : navClasses[`inactive__link__${location}`]
+              }
+            >
+              Profile
+            </NavLink>
             <Link to="/login">
               <Button
                 variant={`contained__${location}`}

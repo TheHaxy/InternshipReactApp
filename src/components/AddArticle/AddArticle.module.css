@@ -59,3 +59,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 1080px) {
+    .editor__section {
+        width: 700px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .editor__section {
+        width: 400px;
+    }
+}

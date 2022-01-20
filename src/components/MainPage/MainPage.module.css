@@ -8,8 +8,14 @@
     max-width: 1070px;
 }
 
-.articles__undefined{
+.articles__undefined {
     font-family: "Playfair Display", serif;
     font-size: 3em;
     line-height: 2.5em;
+}
+
+@media screen and (max-width: 1080px) {
+    .main {
+        width: 100%;
+    }
 }

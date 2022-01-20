@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { signinData } from "../../mockdata/appConstants";
 import { useNavigate } from "react-router-dom";
-import voidUserImage from "../../assets/Group54.svg";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
+import voidUserImage from "../../assets/Group54.svg";
 import SignInPageClasses from "./SignInPage.module.css";
 
 const SignInPage = () => {
@@ -35,21 +35,22 @@ const SignInPage = () => {
   });
 
   useEffect(() => {
-    if (localStorage.LOGIN_USER) navigate("/main-page", { replace: true })
-  }, [localStorage.LOGIN_USER])
+    if (localStorage.LOGIN_USER) navigate("/main-page", { replace: true });
+  }, [localStorage.LOGIN_USER]);
 
   const submitForm = (e) => {
     e.preventDefault();
     console.log(usersStorage);
     const checkUser = usersStorage.find(
-      (item) => item.email === formState.email.value);
+      (item) => item.email === formState.email.value
+    );
     if (!checkUser) {
       const newUser = {
         firstName: formState.firstName.value,
         lastName: formState.lastName.value,
         email: formState.email.value,
         password: formState.password.value,
-        image: voidUserImage,
+        image: JSON.stringify(voidUserImage),
       };
       usersStorage.push(newUser);
       localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));

@@ -13,6 +13,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import AddArticleClasses from "./AddArticle.module.css";
 
 const AddArticle = () => {
+  const reader = new FileReader();
   const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
   const navigate = useNavigate();
   const [articlesStorage, setArticlesStorage] = useState([]);
@@ -24,7 +25,7 @@ const AddArticle = () => {
   });
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
-  )
+  );
 
   useEffect(() => {
     if (localStorage.ARTICLES_STORAGE)
@@ -32,8 +33,8 @@ const AddArticle = () => {
   }, []);
 
   useEffect(() => {
-    if (!localStorage.LOGIN_USER) navigate("/login", { replace: true })
-  }, [localStorage.LOGIN_USER])
+    if (!localStorage.LOGIN_USER) navigate("/login", { replace: true });
+  }, [localStorage.LOGIN_USER]);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -51,7 +52,8 @@ const AddArticle = () => {
       title: inputValue.title,
       category: inputValue.subtitle,
       text: selectedText,
-      image: newImage,
+      image: JSON.stringify(newImage),
+      authorImage: user.image,
       author: `${user.firstName} ${user.lastName}`,
       email: user.email,
       date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
@@ -64,8 +66,12 @@ const AddArticle = () => {
   };
 
   const openImage = (e) => {
-    setNewImage(btoa(e.target.files[0]));
-    console.log(e.target.files[0].webkitRelativePath);
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setNewImage(base64String);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (

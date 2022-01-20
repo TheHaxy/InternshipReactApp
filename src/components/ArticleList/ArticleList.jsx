@@ -8,7 +8,9 @@ import articleListClasses from "./ArticleList.module.css";
 
 const ArticleList = ({ location }) => {
   const [count, setCount] = useState(0);
-  const [articlesStorage, setArticlesStorage] = useState(JSON.parse(localStorage.getItem("ARTICLES_STORAGE")))
+  const [articlesStorage, setArticlesStorage] = useState(
+    JSON.parse(localStorage.getItem("ARTICLES_STORAGE"))
+  );
 
   const onClickNextButton = useCallback(() => {
     setCount((count) => count + 1);
@@ -19,7 +21,7 @@ const ArticleList = ({ location }) => {
   }, []);
 
   const findMyArticles = useMemo(() => {
-    if (location === "my_articles") {
+    if (location === "my_articles" && localStorage.LOGIN_USER) {
       return articlesStorage.filter((article) => {
         return article.email === JSON.parse(localStorage.LOGIN_USER).email;
       });
@@ -34,13 +36,15 @@ const ArticleList = ({ location }) => {
         </h1>
       )}
       <div>
-        {location === "my_articles"
-          ? findMyArticles.reverse()
+        {location === "my_articles" && localStorage.LOGIN_USER
+          ? findMyArticles
+              .reverse()
               .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
               .map((myArticle) => {
-                return <Article location={location} article={myArticle}/>;
+                return <Article location={location} article={myArticle} />;
               })
-          : articlesStorage.reverse()
+          : articlesStorage
+              .reverse()
               .slice(count * APP_ARTICLES_PAGE, (count + 1) * APP_ARTICLES_PAGE)
               .map((article) => {
                 return <Article article={article} location={location} />;
@@ -59,8 +63,8 @@ const ArticleList = ({ location }) => {
             name="Next"
             onClick={onClickNextButton}
             isDisable={
-              (count === 0 && findMyArticles.length < 7) ||
-              count * APP_ARTICLES_PAGE >= findMyArticles.length - 1
+              (count === 0 && findMyArticles?.length < 7) ||
+              count * APP_ARTICLES_PAGE >= findMyArticles?.length - 1
             }
           />
         ) : (

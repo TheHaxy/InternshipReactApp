@@ -28,6 +28,7 @@
     align-items: center;
     width: 126px;
     height: 126px;
+    overflow: hidden;
     border-radius: 50%;
     background: #E5E5E5;
     margin-bottom: 32px;
@@ -77,4 +78,76 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: rgba(140, 140, 140, 1);
+}
+
+@media screen and (max-width: 1080px) {
+    .my_articles__user__avatar__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 664px;
+        height: 664px;
+    }
+
+    .profile__user__avatar__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 664px;
+        height: 664px;
+    }
+
+    .user__avatar__container {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 40px;
+    }
+
+    .user__name {
+        width: 600px;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        margin-bottom: 32px;
+    }
+
+    .user__description {
+        width: 600px;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        min-height: 100px;
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+    .my_articles__user__avatar__card {
+        max-width: 346px;
+        height: 362px;
+    }
+
+    .profile__user__avatar__card {
+        width: 366px;
+        height: 366px;
+    }
+
+    .user__avatar__container {
+        width: 126px;
+        height: 126px;
+        margin-bottom: 40px;
+    }
+
+    .user__name {
+        width: 400px;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        margin-bottom: 16px;
+    }
+
+    .user__description {
+        width: 400px;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
 }

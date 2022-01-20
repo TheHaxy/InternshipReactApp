@@ -1,3 +1,4 @@
+
 .main_page__article {
     display: flex;
     align-items: center;
@@ -185,4 +186,58 @@
     color: #8C8C8C;
     margin-bottom: 48px;
 
+}
+
+@media screen and (max-width: 1080px) {
+    .main_page__article {
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+    }
+
+    .article_list__article {
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+    }
+
+    .main_page__article__info {
+        width: 680px;
+    }
+
+    .main_page__article__img {
+        width: 100%;
+        height: auto;
+    }
+
+    .article_list__article__img {
+        width: 100%;
+        height: auto;
+    }
+
+
+}
+
+@media screen and (max-width: 750px) {
+    .main_page__article__info {
+        max-width: 400px;
+    }
+
+    .article_list__article__info {
+        max-width: 400px;
+    }
+
+    .main_page__article__img {
+        width: 100%;
+        height: auto;
+    }
+
+    .article_list__article__img {
+        width: 100%;
+        height: auto;
+    }
+
+    .my_articles__article__img {
+        width: 100%
+    }
 }

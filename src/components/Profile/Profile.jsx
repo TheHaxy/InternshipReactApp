@@ -13,24 +13,27 @@ import ProfileClasses from "./Profile.module.css";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Profile = () => {
+  const reader = new FileReader();
   const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"));
   const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
-  const navigate = useNavigate()
-  const [userImage, setUserImage] = useState(user.image);
+  const navigate = useNavigate();
+  const [userImage, setUserImage] = useState(
+    localStorage.LOGIN_USER && JSON.parse(user.image)
+  );
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [inputValue, setInputValue] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    description: user.description,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    description: user?.description,
   });
 
   useEffect(() => {
     if (inputValue) setIsDisableBtn(false);
-  }, [inputValue]);
+  }, [inputValue, userImage]);
 
   useEffect(() => {
-    if (!localStorage.LOGIN_USER) navigate("/main-page", { replace: true })
-  }, [localStorage.LOGIN_USER])
+    if (!localStorage.LOGIN_USER) navigate("/login", { replace: true });
+  }, [localStorage.LOGIN_USER]);
 
   const editTextarea = (e) => {
     setInputValue({ ...inputValue, description: e.target.value });
@@ -42,24 +45,31 @@ const Profile = () => {
   };
 
   const openFile = (e) => {
-    setUserImage(e.target.value);
-    setIsDisableBtn(false);
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setUserImage(base64String);
+    };
+    reader.readAsDataURL(file);
   };
 
   const saveChanges = (e) => {
     e.preventDefault();
-    user.image = userImage;
+    user.image = JSON.stringify(userImage);
     user.firstName = inputValue.firstName;
     user.lastName = inputValue.lastName;
     user.description = inputValue.description;
     setIsDisableBtn(true);
-    usersStorage.map((item) => {return item.email === user.email && [
-      item.firstName = user.firstName,
-      item.lastName = user.lastName,
-      item.description = user.description,
-      item.image = user.image,
-    ]
-    })
+    usersStorage.map((item) => {
+      return (
+        item.email === user.email && [
+          (item.firstName = user.firstName),
+          (item.lastName = user.lastName),
+          (item.description = user.description),
+          (item.image = user.image),
+        ]
+      );
+    });
     localStorage.setItem("LOGIN_USER", JSON.stringify(user));
     localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));
   };
@@ -97,7 +107,7 @@ const Profile = () => {
               <textarea
                 className={ProfileClasses.textarea}
                 onChange={(e) => editTextarea(e)}
-                value={inputValue.description}
+                value={inputValue?.description}
               />
             </label>
             <Button

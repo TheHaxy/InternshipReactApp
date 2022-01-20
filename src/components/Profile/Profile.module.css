@@ -44,3 +44,39 @@
     border: 1px solid #8C8C8C;
     outline: none;
 }
+
+@media screen and (max-width: 1080px) {
+    .profile__page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 800px;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile__form__input_name {
+        flex-direction: column;
+        gap: 0;
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+    .profile__page {
+        width: 400px;
+    }
+
+    .profile__form {
+        width: 400px;
+    }
+
+    .textarea {
+        width: 400px;
+    }
+
+}

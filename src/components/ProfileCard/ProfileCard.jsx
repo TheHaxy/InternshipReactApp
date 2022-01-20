@@ -32,10 +32,10 @@ const ProfileCard = ({ userImage, OnChange, OnClick, location, user }) => {
       ) : (
         <>
           <p className={ProfileClasses[`user__name`]}>
-            {user.firstName} {user.lastName}
+            {user?.firstName} {user?.lastName}
           </p>
           <p className={ProfileClasses[`user__description`]}>
-            {user.description}
+            {user?.description}
           </p>
         </>
       )}

@@ -20,3 +20,9 @@
     max-width: 1070px;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+@media screen and (max-width: 1080px) {
+    .copyright__info {
+        padding: 24px 30px;
+    }
+}

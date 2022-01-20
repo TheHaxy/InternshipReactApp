@@ -4,3 +4,12 @@
     align-self: center;
     gap: 73px;
 }
+
+@media screen and (max-width: 1080px) {
+    .article__page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 750px;
+    }
+}

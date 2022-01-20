@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&__display=swap');
 
-button {
-
-}
-
 button:hover {
   cursor: pointer;
 }
@@ -59,27 +55,6 @@ button:hover {
   &__contained__header:disabled {
     opacity: 50%;
     cursor: default;
-  }
-
-  &__nolined__header {
-    background: transparent;
-    border: none;
-    color: #8C8C8C;
-    padding: 0.5rem 0;
-    margin: 0 20px;
-  }
-
-  &__nolined__footer {
-    color: #EBEBEB;
-    background: transparent;
-    border: none;
-    padding: 0.5rem 0;
-    margin: 0 20px;
-  }
-
-  &__active__nolined__header {
-    border-bottom: 2px solid #242424;
-    color: rgba(36, 36, 36, 1);
   }
 
   &__upload {

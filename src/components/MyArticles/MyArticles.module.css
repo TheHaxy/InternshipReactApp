@@ -6,14 +6,29 @@
     gap: 40px;
 }
 
-.articles__undefined{
+.articles__undefined {
     font-family: "Playfair Display", serif;
     font-size: 3em;
     line-height: 2.5em;
 }
 
-.not__found__section{
+.not__found__section {
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+@media screen and (max-width: 1080px) {
+    .article__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .article__container {
+        width: 400px;
+    }
 }
