@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import MainPage from "./components/MainPage/MainPage";
@@ -7,9 +6,9 @@ import SignInPage from "./components/SignInPage/SignInPage";
 import Profile from "./components/Profile/Profile";
 import MyArticles from "./components/MyArticles/MyArticles";
 import AddArticle from "./components/AddArticle/AddArticle";
+import ArticlePage from "./components/ArticlePage/ArticlePage";
 
 import "./App.css";
-import ArticlePage from "./components/ArticlePage/ArticlePage";
 
 function App() {
   return (

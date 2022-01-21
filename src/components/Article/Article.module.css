@@ -1,243 +1,240 @@
 
 .main_page__article {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  gap: 24px;
 }
 
 .main_page__article:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .main_page__article__img {
-    width: 582px;
-    height: auto;
+  width: 582px;
 }
 
 .main_page__article__info {
-    width: 459px;
-    height: 397px;
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 459px;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .article__other__info, .author, .views {
-    color: #8C8C8C;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  color: #8C8C8C;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .views, .time {
-    font-size: 0.75rem;
-    font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.75rem;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .author {
-    font-weight: 500;
-    font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .article__other__info {
-    gap: 24px;
-    padding-bottom: 17px;
-    border-bottom: 1px solid #EBEBEB;
+  gap: 24px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #EBEBEB;
 }
 
 .author__img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 .article__title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 2.5rem;
-    margin-bottom: 16px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  margin-bottom: 16px;
 }
 
 .article__tag {
-    font-family: 'Inter', sans-serif;
-    width: min-content;
-    display: inline;
-    color: #8C8C8C;
-    font-size: 0.75rem;
-    background: #F6F6F6;
-    padding: 0.5rem 0.75rem;
-    border-radius: 118px;
-    margin-bottom: 24px;
+  font-family: 'Inter', sans-serif;
+  width: min-content;
+  display: inline;
+  color: #8C8C8C;
+  font-size: 0.75rem;
+  background: #F6F6F6;
+  padding: 0.5rem 0.75rem;
+  border-radius: 118px;
+  margin-bottom: 24px;
 }
 
 .main_page__article__subtitle {
-    font-family: IBM Plex Sans, sans-serif;
-    height: 156px;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.62rem;
-    color: #8C8C8C;
-    margin-bottom: 29px;
-    overflow: hidden;
+  font-family: IBM Plex Sans, sans-serif;
+  height: 156px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.62rem;
+  color: #8C8C8C;
+  margin-bottom: 29px;
+  overflow: hidden;
 }
 
 /*ArticleList classes*/
 
 .article_list__article {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    margin: 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 40px 0;
 }
 
 .article_list__article:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .article_list__article__info {
-    width: 680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .article_list__article__img {
-    width: 367px;
-    height: 260px;
+  width: 367px;
+  height: 260px;
 }
 
 .article_list__article__subtitle {
-    max-height: 80px;
-    overflow: hidden;
-    font-family: IBM Plex Sans, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.62rem;
-    color: #8C8C8C;
-    margin-bottom: 24px;
+  max-height: 80px;
+  overflow: hidden;
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.62rem;
+  color: #8C8C8C;
+  margin-bottom: 24px;
 }
 
 /*MyArticles classes*/
 
 .my_articles__article {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 40px 0;
 }
 
 .my_articles__article:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .my_articles__article:nth-child(1) {
-    margin: 0;
+  margin: 0;
 }
 
 .my_articles__article__info {
-    max-width: 664px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  max-width: 664px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .my_articles__article__img {
-    width: 664px;
-    height: auto;
+  width: 664px;
+  height: auto;
 }
 
 .my_articles__article__subtitle {
-    max-height: 80px;
-    overflow: hidden;
-    font-family: IBM Plex Sans, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.62rem;
-    color: #8C8C8C;
-    margin-bottom: 24px;
+  max-height: 80px;
+  overflow: hidden;
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.62rem;
+  color: #8C8C8C;
+  margin-bottom: 24px;
 }
 
 /*Article Page Classes*/
 
 .article_page__article__info {
-    width: 676px;
-    display: flex;
-    flex-direction: column;
+  width: 676px;
+  display: flex;
+  flex-direction: column;
 }
 
 .article_page__article__title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 3rem;
-    line-height: 3rem;
-    margin-bottom: 32px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3rem;
+  margin-bottom: 32px;
 }
 
 .article_page__article__img {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .article_page__article__subtitle {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 1rem;
-    line-height: 1.625rem;
-    color: #8C8C8C;
-    margin-bottom: 48px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.625rem;
+  color: #8C8C8C;
+  margin-bottom: 48px;
 
 }
 
 @media screen and (max-width: 1080px) {
-    .main_page__article {
-        display: flex;
-        flex-direction: column;
-        align-content: flex-start;
-    }
+  .main_page__article {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+  }
 
-    .article_list__article {
-        display: flex;
-        flex-direction: column;
-        align-content: flex-start;
-    }
+  .article_list__article {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+  }
 
-    .main_page__article__info {
-        width: 680px;
-    }
+  .main_page__article__info {
+    width: 680px;
+  }
 
-    .main_page__article__img {
-        width: 100%;
-        height: auto;
-    }
+  .main_page__article__img {
+    width: 100%;
+    height: auto;
+  }
 
-    .article_list__article__img {
-        width: 100%;
-        height: auto;
-    }
+  .article_list__article__img {
+    width: 100%;
+    height: auto;
+  }
 
 
 }
 
 @media screen and (max-width: 750px) {
-    .main_page__article__info {
-        max-width: 400px;
-    }
+  .main_page__article__info {
+    max-width: 400px;
+  }
 
-    .article_list__article__info {
-        max-width: 400px;
-    }
+  .article_list__article__info {
+    max-width: 400px;
+  }
 
-    .main_page__article__img {
-        width: 100%;
-        height: auto;
-    }
+  .main_page__article__img {
+    width: 100%;
+    height: auto;
+  }
 
-    .article_list__article__img {
-        width: 100%;
-        height: auto;
-    }
+  .article_list__article__img {
+    width: 100%;
+    height: auto;
+  }
 
-    .my_articles__article__img {
-        width: 100%
-    }
+  .my_articles__article__img {
+    width: 100%
+  }
 }

@@ -1,0 +1,18 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  margin: 0 10px;
+  max-width: 1070px;
+  @media screen and (max-width: 1080px) {
+    width: 100%;
+  }
+
+  &__articles- {
+    font-family: "Playfair Display", serif;
+    font-size: 3em;
+    line-height: 2.5em;
+  }
+}

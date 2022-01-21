@@ -32,7 +32,7 @@ const SignInPage = () => {
   useEffect(() => {
     if (localStorage.USERS_DATA)
       setUsersStorage(JSON.parse(localStorage.getItem("USERS_DATA")));
-  });
+  }, [localStorage.USERS_DATA]);
 
   useEffect(() => {
     if (localStorage.LOGIN_USER) navigate("/main-page", { replace: true });
