@@ -12,7 +12,6 @@ import voidUserImage from "../../assets/Group54.svg";
 import SignInPageClasses from "./SignInPage.module.css";
 
 const SignInPage = () => {
-  const [usersStorage, setUsersStorage] = useState([]);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [formState, setFormState] = useState(signinData);
@@ -29,22 +28,8 @@ const SignInPage = () => {
     });
   }, [formState]);
 
-  useEffect(() => {
-    if (localStorage.USERS_DATA)
-      setUsersStorage(JSON.parse(localStorage.getItem("USERS_DATA")));
-  }, [localStorage.USERS_DATA]);
-
-  useEffect(() => {
-    if (localStorage.LOGIN_USER) navigate("/main-page", { replace: true });
-  }, [localStorage.LOGIN_USER]);
-
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(usersStorage);
-    const checkUser = usersStorage.find(
-      (item) => item.email === formState.email.value
-    );
-    if (!checkUser) {
       const newUser = {
         firstName: formState.firstName.value,
         lastName: formState.lastName.value,
@@ -52,14 +37,27 @@ const SignInPage = () => {
         password: formState.password.value,
         image: JSON.stringify(voidUserImage),
       };
-      usersStorage.push(newUser);
-      localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));
-      localStorage.setItem("LOGIN_USER", JSON.stringify(newUser));
-      navigate("/main-page", { replace: true });
-    } else {
-      localStorage.setItem("USERS_DATA", JSON.stringify(usersStorage));
-      setIsDisableBtn(true);
-    }
+      const register = fetch('http://localhost:5000/api/auth/register',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(newUser)
+      })
+    register.then(res => {
+      if (res.status === 201) {
+        const login = fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify({
+            email: newUser.email,
+            password: newUser.password
+          })
+        })
+      }
+    })
   };
 
   return (
