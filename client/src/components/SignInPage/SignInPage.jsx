@@ -44,7 +44,7 @@ const SignInPage = () => {
         },
         body: JSON.stringify(newUser)
       })
-    register.then(res => {
+    register.then( async res => {
       if (res.status === 201) {
         const login = fetch('http://localhost:5000/api/auth/login', {
           method: 'POST',
@@ -56,6 +56,8 @@ const SignInPage = () => {
             password: newUser.password
           })
         })
+        await login.then(res => res.json().then(res => localStorage.setItem("USER_TOKEN", res.token)))
+        navigate("/main-page")
       }
     })
   };

@@ -15,7 +15,6 @@ const LoginPage = () => {
   const [formState, setFormState] = useState(loginData)
   const [isDisableBtn, setIsDisableBtn] = useState(true)
   const [inputValue, setInputValue] = useState("")
-  const usersStorage = JSON.parse(localStorage.getItem("USERS_DATA"))
   const navigate = useNavigate();
   const validState = [];
 
@@ -30,19 +29,31 @@ const LoginPage = () => {
   }, [validState, formState])
 
   useEffect(() => {
-    if (localStorage.LOGIN_USER) navigate("/main-page", { replace: true })
-  }, [localStorage.LOGIN_USER])
+    if (localStorage.USER_TOKEN) navigate("/main-page", { replace: true })
+  }, [localStorage.USER_TOKEN])
 
   const clickLoginBth = (e) => {
     e.preventDefault();
-    const thisUser = usersStorage.find(
-      (item) => item.email === formState.email.value)
-    if (thisUser && formState.password.value === thisUser.password) {
-      localStorage.setItem("LOGIN_USER", JSON.stringify(thisUser))
-      navigate("/main-page", { replace: true })
-    } else {
-      e.preventDefault()
+    const thisUser = {
+      email: formState.email.value,
+      password: formState.password.value
     }
+    const login = fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        email: thisUser.email,
+        password: thisUser.password
+      })
+    })
+    login.then(res => res.json().then(async res => {
+      if (res.token) {
+        await localStorage.setItem("USER_TOKEN", res.token)
+        navigate("/main-page")
+      }
+    }))
   };
 
   return (

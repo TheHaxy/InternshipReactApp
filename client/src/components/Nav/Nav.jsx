@@ -17,7 +17,7 @@ const Nav = ({ location }) => {
         />
       </Link>
       <div className={navClasses[`header__buttons`]}>
-        {!localStorage.LOGIN_USER ? (
+        {!localStorage.getItem("USER_TOKEN") ? (
           <>
             <Link to="/login">
               <Button variant={`outlined__${location}`} name="Log in" />
@@ -73,7 +73,7 @@ const Nav = ({ location }) => {
               <Button
                 variant={`contained__${location}`}
                 name="Logout"
-                onClick={() => localStorage.removeItem("LOGIN_USER")}
+                onClick={() => localStorage.removeItem("USER_TOKEN")}
               />
             </Link>
           </>
