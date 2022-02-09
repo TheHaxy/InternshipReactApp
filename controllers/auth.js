@@ -46,6 +46,7 @@ module.exports.register = async (req, res) => {
             lastName: req.body.lastName,
             email: req.body.email,
             password: bcrypt.hashSync(password, salt),
+            description: "",
             image: req.body.image
         })
 

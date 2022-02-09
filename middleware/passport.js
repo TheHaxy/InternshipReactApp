@@ -5,24 +5,33 @@ const User = require("../models/user")
 const keys = require("../config/keys")
 
 const options = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: keys.jwt
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: keys.jwt
 }
 
 module.exports = passport => {
-    passport.use(
-        new JwtStrategy(options, async (payload, done) => {
-            try {
-                const newUser = await User.findById(payload.userId).select("email id")
+  passport.use(
+      new JwtStrategy(options, async (payload, done) => {
+        try {
+          const user = await User.findById(payload.userId).select("email id")
 
-                if (newUser) {
-                    done(null, newUser)
-                } else {
-                    done(null, false)
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        })
-    )
+          passport.serializeUser((user, done) => {
+            done(null, user);
+          });
+
+          passport.deserializeUser((user, done) => {
+            done(null, user);
+          });
+
+          if (user) {
+            done(null, user)
+
+          } else {
+            done(null, false)
+          }
+        } catch (e) {
+          console.log(e)
+        }
+      })
+  )
 }
