@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 
 import {useNavigate} from "react-router-dom";
 
@@ -12,32 +12,26 @@ import voidUserImage from "../../assets/Group54.svg";
 import ProfileClasses from "./Profile.module.css";
 import ProfileCard from "../ProfileCard/ProfileCard";
 
-const profile = fetch("http://localhost:5000/api/profile", {
-  method: "PATCH",
-  headers: {
-    'Authorization': localStorage.USER_TOKEN
-  }
-})
-profile.then(res => res.json()).then(res => {
-  localStorage.setItem("USER_DATA", JSON.stringify(res))
-})
-
 const Profile = () => {
   const reader = new FileReader();
   const navigate = useNavigate();
-  const [isDisableBtn, setIsDisableBtn] = useState(false);
+
+  const profile = useCallback( () => {
+      fetch("http://localhost:5000/api/profile", {
+        method: "PATCH",
+        headers: {'Authorization': localStorage.USER_TOKEN}})
+  profile.then(res => res.json()).then(res => {
+    localStorage.setItem("USER_DATA", JSON.stringify(res))
+  })}, [localStorage.USER_DATA])
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("USER_DATA")))
-  const [userImage, setUserImage] = useState(user.image);
   const [inputValue, setInputValue] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
-    description: user?.description
+    description: user?.description,
+    image: user.image
   });
   console.log(inputValue)
-
-  // useEffect(() => {
-  //   if (inputValue) setIsDisableBtn(false);
-  // }, []);
 
   useEffect(() => {
     if (!localStorage.USER_TOKEN) navigate("/login", {replace: true});
@@ -48,33 +42,30 @@ const Profile = () => {
   };
 
   const deleteAvatar = () => {
-    setUserImage(voidUserImage);
-    setIsDisableBtn(false);
+    setInputValue({...inputValue, image: voidUserImage});
   };
 
   const openFile = (e) => {
     const file = e.target.files[0];
     reader.onloadend = () => {
       const base64String = reader.result;
-      setUserImage(base64String);
+      setInputValue({...inputValue, image: base64String});
     };
     reader.readAsDataURL(file);
   };
 
   const saveChanges = (e) => {
+    console.log(inputValue)
     e.preventDefault();
     fetch("http://localhost:5000/api/profile", {
       method: "PATCH",
       headers: {
+        'Content-Type': 'application/json;charset=utf-8',
         'Authorization': localStorage.USER_TOKEN
       },
-      body:{
-        firstName: inputValue.firstName,
-        lastName: inputValue.lastName,
-        description: inputValue?.description,
-        image: inputValue.image
-      }
+      body: JSON.stringify(inputValue)
     })
+    localStorage.setItem("USER_DATA", JSON.stringify(inputValue))
   }
 
   return (
@@ -86,7 +77,7 @@ const Profile = () => {
             <ProfileCard
                 OnClick={() => deleteAvatar()}
                 OnChange={(e) => openFile(e)}
-                userImage={userImage}
+                userImage={inputValue.image}
                 location="profile"
                 user={user}
             />
@@ -117,7 +108,6 @@ const Profile = () => {
                   variant="contained__header"
                   name="Save Changes"
                   onClick={(e) => saveChanges(e)}
-                  isDisable={isDisableBtn}
               />
             </form>
           </section>
