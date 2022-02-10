@@ -10,25 +10,24 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import ArticleList from "../ArticleList/ArticleList";
 
 const MyArticles = () => {
-  const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
+  const user = JSON.parse(localStorage.getItem("USER_DATA"));
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.LOGIN_USER) navigate("/login", { replace: true });
-  }, [localStorage.LOGIN_USER]);
+    if (!localStorage.USER_TOKEN) navigate("/login", { replace: true });
+  }, [localStorage.USER_TOKEN]);
 
   return (
     <>
       <Header />
-      {localStorage.LOGIN_USER && (
+      {localStorage.USER_TOKEN && (
         <main className={MyArticleClasses[`article__container`]}>
           <ProfileCard
             className={MyArticleClasses[`profile__card`]}
-            userImage={JSON.parse(user.image)}
             user={user}
             location="my_articles"
           />
-          {localStorage.ARTICLES_STORAGE ? (
+          {localStorage.ARTICLE_STORAGE ? (
             <ArticleList
               className={MyArticleClasses[`article__list`]}
               location="my_articles"

@@ -6,7 +6,11 @@ const articleSchema = new Schema({
         type: String,
         required: true
     },
-    subtitle: {
+    category: {
+        type: String,
+        required: true
+    },
+    text: {
         type: String,
         required: true
     },
@@ -17,6 +21,10 @@ const articleSchema = new Schema({
     author: {
         ref: 'users',
         type: Schema.Types.ObjectId
+    },
+    authorImage: {
+        type: String,
+        required: true
     },
     date: {
         type: String,

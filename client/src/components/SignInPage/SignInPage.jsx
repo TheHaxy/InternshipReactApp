@@ -39,9 +39,7 @@ const SignInPage = () => {
       };
       const register = fetch('http://localhost:5000/api/auth/register',{
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
+        headers: {'Content-Type': 'application/json;charset=utf-8'},
         body: JSON.stringify(newUser)
       })
     register.then( async res => {

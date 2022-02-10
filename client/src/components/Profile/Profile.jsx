@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {useNavigate} from "react-router-dom";
 
@@ -16,21 +16,14 @@ const Profile = () => {
   const reader = new FileReader();
   const navigate = useNavigate();
 
-  const profile = useCallback( () => {
-      fetch("http://localhost:5000/api/profile", {
-        method: "PATCH",
-        headers: {'Authorization': localStorage.USER_TOKEN}})
+  const profile = fetch("http://localhost:5000/api/profile", {
+    method: "PATCH",
+    headers: {'Authorization': localStorage.USER_TOKEN}
+  })
   profile.then(res => res.json()).then(res => {
     localStorage.setItem("USER_DATA", JSON.stringify(res))
-  })}, [localStorage.USER_DATA])
-
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("USER_DATA")))
-  const [inputValue, setInputValue] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    description: user?.description,
-    image: user.image
-  });
+  })
+  const [inputValue, setInputValue] = useState(JSON.parse(localStorage.getItem("USER_DATA")));
   console.log(inputValue)
 
   useEffect(() => {
@@ -77,9 +70,8 @@ const Profile = () => {
             <ProfileCard
                 OnClick={() => deleteAvatar()}
                 OnChange={(e) => openFile(e)}
-                userImage={inputValue.image}
                 location="profile"
-                user={user}
+                user={inputValue}
             />
             <form className={ProfileClasses[`profile__form`]}>
               <div className={ProfileClasses[`profile__form__input_name`]}>

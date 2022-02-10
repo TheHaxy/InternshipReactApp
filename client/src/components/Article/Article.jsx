@@ -6,16 +6,22 @@ import eyeIcon from "../../assets/Vector.svg";
 import articleClasses from "./Article.module.css";
 
 const Article = ({ location, article }) => {
-  const articlesStorage = JSON.parse(localStorage.getItem("ARTICLES_STORAGE"));
+  const [articlesStorage, setArticlesStorage] = useState(JSON.parse(localStorage.getItem("ARTICLE_STORAGE")));
   const [articleViews, setArticleViews] = useState(article.views);
   const navigate = useNavigate();
 
   const articleOnClick = () => {
-    articlesStorage.map((item) => {
-      return item.id === article.id && setArticleViews(item.views++);
-    });
-    localStorage.setItem("ARTICLES_STORAGE", JSON.stringify(articlesStorage));
-    navigate(`/article-page#${article.id}`, { replace: true });
+    fetch("http://localhost:5000/api/article-onclick", {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': localStorage.USER_TOKEN
+      },
+      body: {
+        views: articleViews + 1
+      }
+    })
+    navigate(`/article-page#${article._id}`, { replace: true });
   };
   return (
     <>
@@ -43,7 +49,7 @@ const Article = ({ location, article }) => {
               <div className={articleClasses.author}>
                 <img
                   className={articleClasses[`author__img`]}
-                  src={JSON.parse(article.authorImage)}
+                  src={article.authorImage}
                   alt="author"
                 />
                 <p className={articleClasses[`author__name`]}>
@@ -79,7 +85,7 @@ const Article = ({ location, article }) => {
               <div className={articleClasses.author}>
                 <img
                   className={articleClasses[`author__img`]}
-                  src={JSON.parse(article.authorImage)}
+                  src={article.authorImage}
                   alt="author"
                 />
                 <p className={articleClasses[`author__name`]}>

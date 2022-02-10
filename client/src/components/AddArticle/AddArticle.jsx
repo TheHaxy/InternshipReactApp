@@ -14,9 +14,7 @@ import AddArticleClasses from "./AddArticle.module.css";
 
 const AddArticle = () => {
   const reader = new FileReader();
-  const user = JSON.parse(localStorage.getItem("LOGIN_USER"));
   const navigate = useNavigate();
-  const [articlesStorage, setArticlesStorage] = useState([]);
   const [isDisableBth, setIsDisableBth] = useState(false);
   const [newImage, setNewImage] = useState("");
   const [inputValue, setInputValue] = useState({
@@ -28,19 +26,14 @@ const AddArticle = () => {
   );
 
   useEffect(() => {
-    if (localStorage.ARTICLES_STORAGE)
-      setArticlesStorage(JSON.parse(localStorage.getItem("ARTICLES_STORAGE")));
-  }, []);
-
-  useEffect(() => {
-    if (!localStorage.LOGIN_USER) navigate("/login", { replace: true });
-  }, [localStorage.LOGIN_USER]);
+    if (!localStorage.USER_TOKEN) navigate("/login", { replace: true });
+  }, [localStorage.USER_TOKEN]);
 
   const handleEditorChange = (state) => {
     setEditorState(state);
   };
 
-  const clickSubmitBth = () => {
+  const clickSubmitBth = async () => {
     const selection = editorState.getSelection();
     const anchorKey = selection.getAnchorKey();
     const currentContent = editorState.getCurrentContent();
@@ -53,15 +46,17 @@ const AddArticle = () => {
       category: inputValue.subtitle,
       text: selectedText,
       image: JSON.stringify(newImage),
-      authorImage: user.image,
-      author: `${user.firstName} ${user.lastName}`,
-      email: user.email,
       date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
-      views: 0,
-      id: articlesStorage.length,
+      views: 0
     };
-    articlesStorage.push(newArticle);
-    localStorage.setItem("ARTICLES_STORAGE", JSON.stringify(articlesStorage));
+    await fetch("http://localhost:5000/api/create-article", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': localStorage.USER_TOKEN
+      },
+      body: JSON.stringify(newArticle)
+    })
     navigate("/main-page", { replace: true });
   };
 

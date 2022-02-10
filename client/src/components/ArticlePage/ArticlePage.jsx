@@ -11,12 +11,12 @@ import ArticlePageClasses from "./ArticlePage.module.css";
 
 
 const ArticlePage = () => {
-  const articlesStorage = JSON.parse(localStorage.getItem("ARTICLES_STORAGE"));
+  const articlesStorage = JSON.parse(localStorage.getItem("ARTICLE_STORAGE"));
   const navigate = useNavigate();
   const location = useLocation();
 
   const thisArticle = articlesStorage.find(
-    (el) => `#${el.id}` === location.hash
+    (el) => `#${el._id}` === location.hash
   );
 
   const openAllArticles = () => {

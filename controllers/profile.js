@@ -1,5 +1,3 @@
-const mongoose = require("mongoose")
-const userSchema = require("../models/user")
 const errorHandler = require("../utils/errorHandler")
 const User = require("../models/user");
 
