@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import {useNavigate} from "react-router-dom";
 
@@ -11,24 +11,27 @@ import voidUserImage from "../../assets/Group54.svg";
 
 import ProfileClasses from "./Profile.module.css";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import axios from "axios";
 
 const Profile = () => {
   const reader = new FileReader();
   const navigate = useNavigate();
-
-  const profile = fetch("http://localhost:5000/api/profile", {
-    method: "PATCH",
-    headers: {'Authorization': localStorage.USER_TOKEN}
-  })
-  profile.then(res => res.json()).then(res => {
-    localStorage.setItem("USER_DATA", JSON.stringify(res))
-  })
-  const [inputValue, setInputValue] = useState(JSON.parse(localStorage.getItem("USER_DATA")));
-  console.log(inputValue)
+  const [inputValue, setInputValue] = useState({
+    firstName: "...",
+    lastName: "...",
+    description: "..."
+  });
 
   useEffect(() => {
     if (!localStorage.USER_TOKEN) navigate("/login", {replace: true});
   }, [localStorage.USER_TOKEN]);
+
+  useEffect(() => {
+    axios.patch("http://localhost:5000/api/profile", {}, {
+      headers: {'Authorization': localStorage.USER_TOKEN}
+    }).then(res => setInputValue(res.data))
+    localStorage.setItem("USER_DATA", JSON.stringify(inputValue))
+  }, [localStorage.USER_DATA])
 
   const editTextarea = (e) => {
     setInputValue({...inputValue, description: e.target.value});
@@ -58,7 +61,7 @@ const Profile = () => {
       },
       body: JSON.stringify(inputValue)
     })
-    localStorage.setItem("USER_DATA", JSON.stringify(inputValue))
+    setInputValue(inputValue)
   }
 
   return (

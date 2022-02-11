@@ -6,7 +6,7 @@ import {APP_ARTICLES_PAGE} from "../../mockdata/appConstants";
 
 import articleListClasses from "./ArticleList.module.css";
 
-const ArticleList = ({location}) => {
+const ArticleList = ({location, allArticles, myArticles}) => {
   const [count, setCount] = useState(0);
 
   const onClickNextButton = useCallback(() => {
@@ -17,30 +17,11 @@ const ArticleList = ({location}) => {
     setCount((count) => count - 1);
   }, [count]);
 
-  if (location === "my_articles") {
-    const articlesData = fetch("http://localhost:5000/api/my-articles", {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'Authorization': localStorage.USER_TOKEN
-      }
-    })
-    articlesData.then(res => res.json()).then(res => localStorage.setItem("MY_ARTICLES", JSON.stringify(res)))
-  } else {
-    const articlesData = fetch("http://localhost:5000/api/main-page", {
-      method: "GET",
-      headers: {'Content-Type': 'application/json;charset=utf-8'}
-    })
-    articlesData.then(res => res.json()).then(res => localStorage.setItem("ARTICLE_STORAGE", JSON.stringify(res)))
-  }
-
   const articles = useMemo(() => {
-    if (location === "my_articles" && localStorage.USER_TOKEN) {
-      return JSON.parse(localStorage.getItem("MY_ARTICLES"))?.reverse()
-    } else {
-      return JSON.parse(localStorage.getItem("ARTICLE_STORAGE"))?.reverse()
-    }
-  }, [location, localStorage.ARTICLE_STORAGE]);
+    return location === "my_articles" && localStorage.USER_TOKEN
+        ? myArticles.reverse()
+        : allArticles.reverse()
+  }, [location, allArticles, myArticles]);
 
   const slicedArticles = useMemo(
       () =>

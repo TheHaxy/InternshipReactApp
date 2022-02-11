@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 
 import Article from "../Article/Article";
 import ArticleList from "../ArticleList/ArticleList";
@@ -6,31 +6,33 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
 import mainClasses from "./MainPage.module.scss";
+import axios from "axios";
 
 const MainPage = () => {
-  const articlesData = fetch("http://localhost:5000/api/main-page", {
-    method: "GET",
-    headers: {'Content-Type': 'application/json;charset=utf-8'}
-  })
-  articlesData.then(res => res.json()).then(res => localStorage.setItem("ARTICLE_STORAGE", JSON.stringify(res)))
-
+  const [allArticles, setAllArticles] = useState([])
   const popularArticle = useMemo(
-       () =>
-        JSON.parse(localStorage.ARTICLE_STORAGE).reduce((prev, curr) => {
-          if (prev?.views > curr?.views) return prev;
-          else return curr;
-        }),
-      [localStorage.ARTICLE_STORAGE]
+      () =>
+          allArticles.length && allArticles.reduce((prev, curr) => {
+            if (prev?.views > curr?.views) return prev;
+            else return curr;
+          }),
+      [allArticles]
   );
+
+  useEffect(async () => {
+    await axios.get("http://localhost:5000/api/main-page", {
+      headers: {'Content-Type': 'application/json;charset=utf-8'}
+    }).then(res => setAllArticles(res.data))
+  }, [])
 
   return (
       <>
         <Header/>
         <main className={mainClasses.main}>
-          {localStorage.ARTICLE_STORAGE ? (
+          {allArticles.length ? (
               <>
                 <Article location="main_page" article={popularArticle}/>
-                <ArticleList location="article_list"/>
+                <ArticleList location="article_list" allArticles={allArticles}/>
               </>
           ) : (
               <h1 className={mainClasses["main__articles-undefined"]}>

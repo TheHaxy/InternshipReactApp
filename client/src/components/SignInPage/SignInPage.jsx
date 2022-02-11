@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
-import { signinData } from "../../mockdata/appConstants";
-import { useNavigate } from "react-router-dom";
+import {signinData} from "../../mockdata/appConstants";
+import {useNavigate} from "react-router-dom";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -10,6 +10,7 @@ import Button from "../UI/Button/Button";
 
 import voidUserImage from "../../assets/Group54.svg";
 import SignInPageClasses from "./SignInPage.module.css";
+import axios from "axios";
 
 const SignInPage = () => {
   const [isDisableBtn, setIsDisableBtn] = useState(true);
@@ -30,94 +31,90 @@ const SignInPage = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-      const newUser = {
-        firstName: formState.firstName.value,
-        lastName: formState.lastName.value,
-        email: formState.email.value,
-        password: formState.password.value,
-        image: JSON.stringify(voidUserImage),
-      };
-      const register = fetch('http://localhost:5000/api/auth/register',{
-        method: 'POST',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
-        body: JSON.stringify(newUser)
-      })
-    register.then( async res => {
+    const newUser = {
+      firstName: formState.firstName.value,
+      lastName: formState.lastName.value,
+      email: formState.email.value,
+      password: formState.password.value,
+      image: JSON.stringify(voidUserImage),
+    };
+
+    fetch('http://localhost:5000/api/auth/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json;charset=utf-8'},
+      body: JSON.stringify(newUser)
+    }).then(res => {
       if (res.status === 201) {
-        const login = fetch('http://localhost:5000/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({
-            email: newUser.email,
-            password: newUser.password
-          })
-        })
-        await login.then(res => res.json().then(res => localStorage.setItem("USER_TOKEN", res.token)))
+        axios.post('http://localhost:5000/api/auth/login', {
+          email: newUser.email,
+          password: newUser.password
+        }, {
+          headers: {'Content-Type': 'application/json;charset=utf-8'},
+        }).then(async res => res.data.token && localStorage.setItem("USER_TOKEN", res.data.token))
+
         navigate("/main-page")
       }
     })
   };
 
   return (
-    <>
-      <Header />
-      <main className={SignInPageClasses["signing__page"]}>
-        <h1 className={SignInPageClasses["signing__title"]}>
-          Create your free account
-        </h1>
-        <form noValidate={true} className={SignInPageClasses[`signing__form`]}>
-          <Input
-            text="First name"
-            name="firstName"
-            type="text"
-            notValidText="Please enter a first name."
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            formState={formState}
-            setFormState={setFormState}
-          />
-          <Input
-            text="Last name"
-            name="lastName"
-            type="text"
-            notValidText="Please enter a last name."
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            formState={formState}
-            setFormState={setFormState}
-          />
-          <Input
-            text="Email Address"
-            name="email"
-            type="email"
-            notValidText="Please enter your username or email address."
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            formState={formState}
-            setFormState={setFormState}
-          />
-          <Input
-            text="Password"
-            name="password"
-            type="password"
-            notValidText="Please enter a password."
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            formState={formState}
-            setFormState={setFormState}
-          />
-          <Button
-            name="Create account"
-            variant="contained__login"
-            isDisable={isDisableBtn}
-            onClick={(e) => submitForm(e)}
-          />
-        </form>
-      </main>
-      <Footer />
-    </>
+      <>
+        <Header/>
+        <main className={SignInPageClasses["signing__page"]}>
+          <h1 className={SignInPageClasses["signing__title"]}>
+            Create your free account
+          </h1>
+          <form noValidate={true} className={SignInPageClasses[`signing__form`]}>
+            <Input
+                text="First name"
+                name="firstName"
+                type="text"
+                notValidText="Please enter a first name."
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                formState={formState}
+                setFormState={setFormState}
+            />
+            <Input
+                text="Last name"
+                name="lastName"
+                type="text"
+                notValidText="Please enter a last name."
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                formState={formState}
+                setFormState={setFormState}
+            />
+            <Input
+                text="Email Address"
+                name="email"
+                type="email"
+                notValidText="Please enter your username or email address."
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                formState={formState}
+                setFormState={setFormState}
+            />
+            <Input
+                text="Password"
+                name="password"
+                type="password"
+                notValidText="Please enter a password."
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                formState={formState}
+                setFormState={setFormState}
+            />
+            <Button
+                name="Create account"
+                variant="contained__login"
+                isDisable={isDisableBtn}
+                onClick={(e) => submitForm(e)}
+            />
+          </form>
+        </main>
+        <Footer/>
+      </>
   );
 };
 

@@ -45,14 +45,14 @@ module.exports.createArticle = async (req, res) => {
 module.exports.onclickArticle = async (req, res) => {
   try {
     await Article.updateOne(
-        {_id: req.body.id},
+        {_id: req.body._id},
         {
           $set: {
             views: req.body.views
           }
         }
     )
-    res.status(200)
+    res.status(200).json(req.body)
   } catch (e) {
     errorHandler(res, e)
   }

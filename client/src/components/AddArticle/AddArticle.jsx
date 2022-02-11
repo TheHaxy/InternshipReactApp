@@ -57,6 +57,21 @@ const AddArticle = () => {
       },
       body: JSON.stringify(newArticle)
     })
+    const allArticles = fetch("http://localhost:5000/api/main-page", {
+      method: "GET",
+      headers: {'Content-Type': 'application/json;charset=utf-8'}
+    })
+    await allArticles.then(res => res.json()).then(res => localStorage.setItem("ARTICLE_STORAGE", JSON.stringify(res)))
+
+    const myArticles = fetch("http://localhost:5000/api/my-articles", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': localStorage.USER_TOKEN
+      }
+    })
+    await myArticles.then(res => res.json()).then(res => localStorage.setItem("MY_ARTICLES", JSON.stringify(res)))
+
     navigate("/main-page", { replace: true });
   };
 

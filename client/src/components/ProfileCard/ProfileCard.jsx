@@ -4,11 +4,13 @@ import Button from "../UI/Button/Button";
 
 import ProfileClasses from "./ProfileCard.module.css";
 
-const ProfileCard = ({ userImage, OnChange, OnClick, location, user }) => {
+import voidUserImage from "../../assets/Group54.svg";
+
+const ProfileCard = ({ OnChange, OnClick, location, user }) => {
   return (
     <div className={ProfileClasses[`${location}__user__avatar__card`]}>
       <div className={ProfileClasses[`user__avatar__container`]}>
-        <img src={user.image} alt="User avatar" />
+        <img src={user?.image || voidUserImage} alt="User avatar" />
       </div>
       {location === "profile" ? (
         <>
