@@ -51,7 +51,6 @@ const Profile = () => {
   };
 
   const saveChanges = (e) => {
-    console.log(inputValue)
     e.preventDefault();
     fetch("http://localhost:5000/api/profile", {
       method: "PATCH",

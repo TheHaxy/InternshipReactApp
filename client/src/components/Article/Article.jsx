@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import eyeIcon from "../../assets/Vector.svg";
 import articleClasses from "./Article.module.css";
 import axios from "axios";
+import draftToHtml from 'draftjs-to-html'
 
 const Article = ({location, article}) => {
   const [articleViews, setArticleViews] = useState(article.views);
@@ -24,6 +25,7 @@ const Article = ({location, article}) => {
     localStorage.setItem("THIS_ARTICLE", JSON.stringify(article))
     navigate(`/article-page#${article._id}`, {replace: true});
   };
+
   return (
       <>
         {location !== "article_page" ? (
@@ -33,7 +35,7 @@ const Article = ({location, article}) => {
             >
               <img
                   className={articleClasses[`${location}__article__img`]}
-                  src={JSON.parse(article.image)}
+                  src={article.image}
                   alt="Article img"
               />
               <section className={articleClasses[`${location}__article__info`]}>
@@ -43,8 +45,9 @@ const Article = ({location, article}) => {
                 <h1 className={articleClasses[`article__title`]}>
                   {article.title}
                 </h1>
-                <p className={articleClasses[`${location}__article__subtitle`]}>
-                  {article.text}
+                <p
+                    className={articleClasses[`${location}__article__subtitle`]}
+                    dangerouslySetInnerHTML={{__html: draftToHtml(article.text)}}>
                 </p>
                 <div className={articleClasses[`article__other__info`]}>
                   <div className={articleClasses.author}>
@@ -79,8 +82,9 @@ const Article = ({location, article}) => {
                     src={JSON.parse(article.image) || ""}
                     alt="Article img"
                 />
-                <p className={articleClasses[`${location}__article__subtitle`]}>
-                  {article.text}
+                <p
+                    className={articleClasses[`${location}__article__subtitle`]}
+                    dangerouslySetInnerHTML={{__html: draftToHtml(article.text)}}>
                 </p>
                 <div className={articleClasses[`article__other__info`]}>
                   <div className={articleClasses.author}>

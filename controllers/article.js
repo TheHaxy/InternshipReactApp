@@ -1,5 +1,4 @@
 const Article = require("../models/article")
-const articleSchema = require("../models/article")
 const User = require("../models/user")
 const errorHandler = require("../utils/errorHandler");
 

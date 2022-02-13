@@ -8,7 +8,6 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
 import ArticlePageClasses from "./ArticlePage.module.css";
-import axios from "axios";
 
 const ArticlePage = () => {
   const [thisArticle, setThisArticle] = useState(JSON.parse(localStorage.getItem("THIS_ARTICLE")))

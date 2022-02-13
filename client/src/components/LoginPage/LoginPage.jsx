@@ -47,6 +47,10 @@ const LoginPage = () => {
           headers: {'Content-Type': 'application/json;charset=utf-8'},
         }).then(async res => res.data.token && localStorage.setItem("USER_TOKEN", res.data.token))
 
+    await axios.patch("http://localhost:5000/api/profile", {}, {
+      headers: {'Authorization': localStorage.USER_TOKEN}
+    }).then(res => localStorage.setItem("USER_DATA", (JSON.stringify(res.data))))
+
     navigate("/main-page")
   };
 

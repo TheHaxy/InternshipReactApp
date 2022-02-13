@@ -7,6 +7,7 @@ import {APP_ARTICLES_PAGE} from "../../mockdata/appConstants";
 import articleListClasses from "./ArticleList.module.css";
 
 const ArticleList = ({location, allArticles, myArticles}) => {
+
   const [count, setCount] = useState(0);
 
   const onClickNextButton = useCallback(() => {

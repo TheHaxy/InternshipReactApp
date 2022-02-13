@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { EditorState } from "draft-js";
+import { EditorState, convertToRaw} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { useNavigate } from "react-router-dom";
 
@@ -34,17 +34,11 @@ const AddArticle = () => {
   };
 
   const clickSubmitBth = async () => {
-    const selection = editorState.getSelection();
-    const anchorKey = selection.getAnchorKey();
-    const currentContent = editorState.getCurrentContent();
-    const currentBlock = currentContent.getBlockForKey(anchorKey);
-    const end = selection.getEndOffset();
-    const selectedText = currentBlock.getText().slice(0, end);
 
     const newArticle = {
       title: inputValue.title,
       category: inputValue.subtitle,
-      text: selectedText,
+      text: convertToRaw(editorState.getCurrentContent()),
       image: JSON.stringify(newImage),
       date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
       views: 0

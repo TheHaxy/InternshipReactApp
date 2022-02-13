@@ -10,6 +10,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "classnames": "^2.3.1",
+    "cross-env": "^7.0.3",
     "dompurify": "^2.3.4",
     "draft-convert": "^2.1.12",
     "draft-js": "^0.11.7",
@@ -25,7 +26,7 @@
     "web-vitals": "^2.1.3"
   },
   "scripts": {
-    "start": "NODE_ENV=production node_modules/react-scripts/bin/react-scripts.js start --proxy-config proxy.conf.json",
+    "start": "react-scripts start",
     "build": "../node_modules/.bin/react-scripts build",
     "test": "../node_modules/.bin/react-scripts test",
     "eject": "../node_modules/.bin/react-scripts eject"

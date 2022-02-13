@@ -9,7 +9,6 @@ import { ReactComponent as Logo } from "../../assets/Logo.svg";
 const Nav = ({ location }) => {
   const logOut = () => {
     localStorage.removeItem("USER_TOKEN")
-    localStorage.removeItem("MY_ARTICLES")
     localStorage.removeItem("USER_DATA")
   }
   return (
