@@ -22,6 +22,10 @@ const articleSchema = new Schema({
         ref: 'users',
         type: Schema.Types.ObjectId
     },
+    authorName: {
+      type: String,
+      required: true
+    },
     authorImage: {
         type: String,
         required: true

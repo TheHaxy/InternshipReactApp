@@ -57,7 +57,7 @@ const Article = ({location, article}) => {
                         alt="author"
                     />
                     <p className={articleClasses[`author__name`]}>
-                      {article.author}
+                      {article.authorName}
                     </p>
                   </div>
                   <p className={articleClasses.time}>{article.date}</p>
@@ -79,7 +79,7 @@ const Article = ({location, article}) => {
                 </h1>
                 <img
                     className={articleClasses[`${location}__article__img`]}
-                    src={JSON.parse(article.image) || ""}
+                    src={article.image}
                     alt="Article img"
                 />
                 <p
@@ -94,7 +94,7 @@ const Article = ({location, article}) => {
                         alt="author"
                     />
                     <p className={articleClasses[`author__name`]}>
-                      {article.author}
+                      {article.authorName}
                     </p>
                   </div>
                   <p className={articleClasses.time}>{article.date}</p>

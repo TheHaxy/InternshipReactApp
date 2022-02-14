@@ -30,6 +30,7 @@ module.exports.createArticle = async (req, res) => {
     image: req.body.image,
     authorImage: candidate.image,
     author: candidate._id,
+    authorName: `${candidate.firstName} ${candidate.lastName}`,
     date: req.body.date,
     views: req.body.views
   })

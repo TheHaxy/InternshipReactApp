@@ -11,6 +11,7 @@ import Button from "../UI/Button/Button";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import AddArticleClasses from "./AddArticle.module.css";
+import imageNotFound from "../../assets/notImage.png"
 
 const AddArticle = () => {
   const reader = new FileReader();
@@ -39,7 +40,7 @@ const AddArticle = () => {
       title: inputValue.title,
       category: inputValue.subtitle,
       text: convertToRaw(editorState.getCurrentContent()),
-      image: JSON.stringify(newImage),
+      image: newImage ? JSON.stringify(newImage) : imageNotFound,
       date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
       views: 0
     };
