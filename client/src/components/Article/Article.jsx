@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 
 import {useLocation, useNavigate} from "react-router-dom";
+import axios from "axios";
+import draftToHtml from 'draftjs-to-html'
 
 import eyeIcon from "../../assets/Vector.svg";
 import articleClasses from "./Article.module.css";
-import axios from "axios";
-import draftToHtml from 'draftjs-to-html'
+import imageNotFound from "../../assets/notImage.png"
 
 const Article = ({location, article}) => {
   const [articleViews, setArticleViews] = useState(article.views);
@@ -35,7 +36,7 @@ const Article = ({location, article}) => {
             >
               <img
                   className={articleClasses[`${location}__article__img`]}
-                  src={article.image}
+                  src={JSON.parse(article.image) || imageNotFound}
                   alt="Article img"
               />
               <section className={articleClasses[`${location}__article__info`]}>
@@ -79,7 +80,7 @@ const Article = ({location, article}) => {
                 </h1>
                 <img
                     className={articleClasses[`${location}__article__img`]}
-                    src={article.image}
+                    src={JSON.parse(article.image) || imageNotFound}
                     alt="Article img"
                 />
                 <p
