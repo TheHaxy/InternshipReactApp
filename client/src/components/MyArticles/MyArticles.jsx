@@ -15,11 +15,14 @@ const MyArticles = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("USER_DATA")))
   const navigate = useNavigate();
 
+  useEffect(() => window.scrollTo(0, 0), [])
+
   useEffect(() => {
     if (!localStorage.USER_TOKEN) navigate("/login", { replace: true });
   }, [localStorage.USER_TOKEN]);
 
   useEffect(async () => {
+    window.scrollTo(0, 0)
     await axios.get("http://localhost:5000/api/my-articles", {
       headers: {'Authorization': localStorage.USER_TOKEN}
     }).then(res => setMyArticles(res.data))
@@ -46,7 +49,6 @@ const MyArticles = () => {
               <h1 className={MyArticleClasses[`articles__undefined`]}>
                 Articles not found...
               </h1>
-              \
             </section>
           )}
         </main>

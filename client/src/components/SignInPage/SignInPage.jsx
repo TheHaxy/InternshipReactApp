@@ -36,7 +36,7 @@ const SignInPage = () => {
       lastName: formState.lastName.value,
       email: formState.email.value,
       password: formState.password.value,
-      image: JSON.stringify(voidUserImage),
+      image: ""
     };
 
     fetch('http://localhost:5000/api/auth/register', {

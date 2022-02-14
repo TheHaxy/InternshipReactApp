@@ -10,7 +10,7 @@ const ProfileCard = ({ OnChange, OnClick, location, user }) => {
   return (
     <div className={ProfileClasses[`${location}__user__avatar__card`]}>
       <div className={ProfileClasses[`user__avatar__container`]}>
-        <img src={user?.image || voidUserImage} alt="User avatar" />
+        <img src={user.image || voidUserImage} alt="User avatar" />
       </div>
       {location === "profile" ? (
         <>

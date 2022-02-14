@@ -11,14 +11,16 @@ import ArticlePageClasses from "./ArticlePage.module.css";
 
 const ArticlePage = () => {
   const [thisArticle, setThisArticle] = useState(JSON.parse(localStorage.getItem("THIS_ARTICLE")))
-
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => window.scrollTo(0, 0), [])
 
   const openAllArticles = () => {
     localStorage.removeItem("THIS_ARTICLE")
     navigate("/main-page", {replace: true});
   };
+
   return (
       <>
         <Header/>

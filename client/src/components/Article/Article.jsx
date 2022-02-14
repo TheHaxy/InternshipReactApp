@@ -11,7 +11,7 @@ import imageNotFound from "../../assets/notImage.png"
 const Article = ({location, article}) => {
   const [articleViews, setArticleViews] = useState(article.views);
   const navigate = useNavigate();
-
+  console.log(article.authorName)
   const articleOnClick = async () => {
     await axios.patch("http://localhost:5000/api/article-onclick", {
       views: articleViews + 1,
