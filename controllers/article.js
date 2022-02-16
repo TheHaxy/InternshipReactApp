@@ -52,7 +52,8 @@ module.exports.onclickArticle = async (req, res) => {
           }
         }
     )
-    res.status(200).json(req.body)
+    const candidate = await Article.findOne({_id: req.body._id})
+    res.status(200).json(candidate)
   } catch (e) {
     errorHandler(res, e)
   }

@@ -2,15 +2,18 @@ import React, {useEffect, useState} from "react"
 
 import {Link} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
+import {useDispatch} from "react-redux";
 
 import Header from "../Header/Header"
 import Footer from "../Footer/Footer"
 import Input from "../UI/Input/Input"
 import Button from "../UI/Button/Button"
 import {loginData} from "../../mockdata/appConstants"
+import Cookies from "js-cookie";
 
 import LoginPageClasses from "./LoginPage.module.css"
-import axios from "axios";
+import {asyncLoginAction} from "../../store/action";
+
 
 const LoginPage = () => {
   const [formState, setFormState] = useState(loginData)
@@ -18,6 +21,7 @@ const LoginPage = () => {
   const [inputValue, setInputValue] = useState("")
   const navigate = useNavigate();
   const validState = [];
+  const dispatch = useDispatch()
 
   useEffect(() => {
     Object.keys(formState).map((i) => {
@@ -30,30 +34,20 @@ const LoginPage = () => {
   }, [validState, formState])
 
   useEffect(() => {
-    if (localStorage.USER_TOKEN) navigate("/main-page", {replace: true})
-  }, [localStorage.USER_TOKEN])
+    if (Cookies.get("TOKEN")) navigate("/main-page", {replace: true})
+  }, [Cookies.get("TOKEN")])
 
-  const clickLoginBth = async (e) => {
+  const clickLoginBth = (e) => {
     e.preventDefault();
-    const thisUser = {
+      const thisUser = {
       email: formState.email.value,
       password: formState.password.value
     }
 
-    await axios.post('http://localhost:5000/api/auth/login', {
-          email: thisUser.email,
-          password: thisUser.password
-        }, {
-          headers: {'Content-Type': 'application/json;charset=utf-8'},
-        }).then(async res => res.data.token && localStorage.setItem("USER_TOKEN", res.data.token))
-
-    await axios.patch("http://localhost:5000/api/profile", {}, {
-      headers: {'Authorization': localStorage.USER_TOKEN}
-    }).then(res => localStorage.setItem("USER_DATA", (JSON.stringify(res.data))))
+    dispatch(asyncLoginAction(thisUser))
 
     navigate("/main-page")
   };
-
 
   return (
       <>

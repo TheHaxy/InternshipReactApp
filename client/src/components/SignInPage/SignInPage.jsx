@@ -2,15 +2,17 @@ import React, {useEffect, useState} from "react";
 
 import {signinData} from "../../mockdata/appConstants";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux"
+import {asyncRegisterAction} from "../../store/action";
+import Cookies from "js-cookie";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
-import voidUserImage from "../../assets/Group54.svg";
 import SignInPageClasses from "./SignInPage.module.css";
-import axios from "axios";
+import voidUserImage from "../../assets/Group54.svg";
 
 const SignInPage = () => {
   const [isDisableBtn, setIsDisableBtn] = useState(true);
@@ -18,16 +20,21 @@ const SignInPage = () => {
   const [formState, setFormState] = useState(signinData);
   const navigate = useNavigate();
   const validState = [];
+  const dispatch = useDispatch()
 
   useEffect(() => {
     Object.keys(formState).map((i) => {
       validState.push(formState[i].isValid);
     });
-    Object.keys(validState).map((i) => {
+    Object.keys(validState).map(() => {
       if (validState.filter((state) => !state).length) setIsDisableBtn(true);
       else setIsDisableBtn(false);
     });
   }, [formState]);
+
+  useEffect(() => {
+    if (Cookies.get("TOKEN")) navigate("/main-page", {replace: true})
+  }, [Cookies.get("TOKEN")])
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -36,25 +43,12 @@ const SignInPage = () => {
       lastName: formState.lastName.value,
       email: formState.email.value,
       password: formState.password.value,
-      image: ""
+      image: voidUserImage
     };
 
-    fetch('http://localhost:5000/api/auth/register', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
-      body: JSON.stringify(newUser)
-    }).then(res => {
-      if (res.status === 201) {
-        axios.post('http://localhost:5000/api/auth/login', {
-          email: newUser.email,
-          password: newUser.password
-        }, {
-          headers: {'Content-Type': 'application/json;charset=utf-8'},
-        }).then(async res => res.data.token && localStorage.setItem("USER_TOKEN", res.data.token))
+    dispatch(asyncRegisterAction(newUser))
 
-        navigate("/main-page")
-      }
-    })
+    navigate("/main-page")
   };
 
   return (

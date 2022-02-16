@@ -1,29 +1,22 @@
 import React, {useState} from "react";
 
-import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import draftToHtml from 'draftjs-to-html'
 
 import eyeIcon from "../../assets/Vector.svg";
 import articleClasses from "./Article.module.css";
 import imageNotFound from "../../assets/notImage.png"
+import {useDispatch} from "react-redux";
+import {asyncOpenArticleAction} from "../../store/action";
 
 const Article = ({location, article}) => {
   const [articleViews, setArticleViews] = useState(article.views);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-  console.log(article.authorName)
-  const articleOnClick = async () => {
-    await axios.patch("http://localhost:5000/api/article-onclick", {
-      views: articleViews + 1,
-      _id: article._id
-    }, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'Authorization': localStorage.USER_TOKEN
-      }
-    }).then(async res => await setArticleViews(res.data.views))
 
-    localStorage.setItem("THIS_ARTICLE", JSON.stringify(article))
+
+  const articleOnClick = async () => {
+    dispatch(asyncOpenArticleAction(article))
     navigate(`/article-page#${article._id}`, {replace: true});
   };
 
@@ -80,7 +73,7 @@ const Article = ({location, article}) => {
                 </h1>
                 <img
                     className={articleClasses[`${location}__article__img`]}
-                    src={JSON.parse(article.image) || imageNotFound}
+                    src={article.image && JSON.parse(article.image) || imageNotFound}
                     alt="Article img"
                 />
                 <p

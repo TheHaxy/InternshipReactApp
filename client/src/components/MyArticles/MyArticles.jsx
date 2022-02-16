@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import MyArticleClasses from "./MyArticles.module.css";
 
@@ -9,29 +8,28 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ProfileCard from "../ProfileCard/ProfileCard";
 import ArticleList from "../ArticleList/ArticleList";
+import Cookies from "js-cookie";
+import {useDispatch, useSelector} from "react-redux";
+import {asyncGetMyArticlesAction} from "../../store/action";
 
 const MyArticles = () => {
-  const [myArticles, setMyArticles] = useState([])
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("USER_DATA")))
+  const dispatch = useDispatch()
+  const myArticles = useSelector((state) => state.getMyArticlesReducer)
+  const [user, setUser] = useState(useSelector((state) => state.getProfileReducer))
   const navigate = useNavigate();
 
-  useEffect(() => window.scrollTo(0, 0), [])
-
   useEffect(() => {
-    if (!localStorage.USER_TOKEN) navigate("/login", { replace: true });
-  }, [localStorage.USER_TOKEN]);
-
-  useEffect(async () => {
-    window.scrollTo(0, 0)
-    await axios.get("http://localhost:5000/api/my-articles", {
-      headers: {'Authorization': localStorage.USER_TOKEN}
-    }).then(res => setMyArticles(res.data))
-  }, [])
+    if (!Cookies.get("TOKEN")) navigate("/login", { replace: true });
+    else {
+      window.scrollTo(0, 0)
+      dispatch(asyncGetMyArticlesAction())
+    }
+  }, [Cookies.get("TOKEN")]);
 
   return (
     <>
       <Header />
-      {localStorage.USER_TOKEN && (
+      {Cookies.get("TOKEN") && (
         <main className={MyArticleClasses[`article__container`]}>
           <ProfileCard
             className={MyArticleClasses[`profile__card`]}

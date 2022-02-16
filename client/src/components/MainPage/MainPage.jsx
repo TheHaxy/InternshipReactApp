@@ -1,6 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
-
-import axios from "axios";
+import React, {useEffect, useMemo} from "react";
 
 import Article from "../Article/Article";
 import ArticleList from "../ArticleList/ArticleList";
@@ -9,10 +7,13 @@ import Footer from "../Footer/Footer";
 
 import mainClasses from "./MainPage.module.scss";
 import preloader from "../../assets/Pulse-1s-200px.svg"
+import {useDispatch, useSelector} from "react-redux";
+import {asyncGetAllArticlesAction} from "../../store/action";
+import Cookies from "js-cookie";
 
 const MainPage = () => {
-  const [allArticles, setAllArticles] = useState([])
-  const [isLoaded, setIsLoaded] = useState(false)
+  const dispatch = useDispatch()
+  const allArticles = useSelector((state) => state.getAllArticlesReducer)
   const popularArticle = useMemo(
       () =>
           allArticles.length && allArticles.reduce((prev, curr) => {
@@ -22,13 +23,10 @@ const MainPage = () => {
       [allArticles]
   );
 
-  useEffect(async () => {
+  useEffect( () => {
     window.scrollTo(0, 0)
-    await axios.get("http://localhost:5000/api/main-page", {
-      headers: {'Content-Type': 'application/json;charset=utf-8'}
-    }).then(res => setAllArticles(res.data))
-    setIsLoaded(true)
-  }, [])
+    !allArticles.length && dispatch(asyncGetAllArticlesAction())
+  }, [Cookies.get("TOKEN")])
 
   return (
       <>

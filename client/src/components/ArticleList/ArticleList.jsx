@@ -1,10 +1,11 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 
 import Article from "../Article/Article";
 import Button from "../UI/Button/Button";
 import {APP_ARTICLES_PAGE} from "../../mockdata/appConstants";
 
 import articleListClasses from "./ArticleList.module.css";
+import Cookies from "js-cookie";
 
 const ArticleList = ({location, allArticles, myArticles}) => {
 
@@ -19,7 +20,7 @@ const ArticleList = ({location, allArticles, myArticles}) => {
   }, [count]);
 
   const articles = useMemo(() => {
-    return location === "my_articles" && localStorage.USER_TOKEN
+    return location === "my_articles" && Cookies.get("TOKEN")
         ? myArticles.reverse()
         : allArticles.reverse()
   }, [location, allArticles, myArticles]);

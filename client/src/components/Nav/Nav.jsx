@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
+import Cookies from "js-cookie";
+
 import Button from "../UI/Button/Button";
 
 import navClasses from "./Nav.module.scss";
@@ -8,9 +10,10 @@ import { ReactComponent as Logo } from "../../assets/Logo.svg";
 
 const Nav = ({ location }) => {
   const logOut = () => {
-    localStorage.removeItem("USER_TOKEN")
-    localStorage.removeItem("USER_DATA")
+    Cookies.remove("TOKEN")
+    localStorage.removeItem("USER")
   }
+
   return (
     <nav className={navClasses[`${location}__nav`]}>
       <Link to="/main-page">
@@ -21,7 +24,7 @@ const Nav = ({ location }) => {
         />
       </Link>
       <div className={navClasses[`header__buttons`]}>
-        {!localStorage.getItem("USER_TOKEN") ? (
+        {!Cookies.get("TOKEN") ? (
           <>
             <Link to="/login">
               <Button variant={`outlined__${location}`} name="Log in" />

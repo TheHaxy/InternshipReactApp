@@ -16,7 +16,7 @@ module.exports.changeProfile = async (req, res) => {
         })
     res.status(200).json(req.body)
   } else {
-    const candidate = await User.findOne({email: req.user.email})
+    const candidate = await User.findOne({_id: req.user._id})
       const profile = {
         firstName: candidate.firstName,
         lastName: candidate.lastName,

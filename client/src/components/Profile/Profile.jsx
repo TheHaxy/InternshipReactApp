@@ -1,37 +1,33 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
+import {useDispatch, useSelector} from "react-redux";
+import {asyncGetProfileAction} from "../../store/action";
 import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-
-import voidUserImage from "../../assets/Group54.svg";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 import ProfileClasses from "./Profile.module.css";
-import ProfileCard from "../ProfileCard/ProfileCard";
-import axios from "axios";
+import voidUserImage from "../../assets/Group54.svg";
 
 const Profile = () => {
   const reader = new FileReader();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState({
-    firstName: "...",
-    lastName: "...",
-    description: "..."
-  });
+  const dispatch = useDispatch()
+  const [inputValue, setInputValue] = useState(useSelector((state) => state.getProfileReducer));
+  console.log(inputValue)
 
   useEffect(() => {
-    if (!localStorage.USER_TOKEN) navigate("/login", {replace: true});
-  }, [localStorage.USER_TOKEN]);
+    !Cookies.get("TOKEN") && navigate("/login", {replace: true})
+  }, [Cookies.get("TOKEN")]);
 
   useEffect(() => {
-    axios.patch("http://localhost:5000/api/profile", {}, {
-      headers: {'Authorization': localStorage.USER_TOKEN}
-    }).then(res => setInputValue(res.data))
-    localStorage.setItem("USER_DATA", JSON.stringify(inputValue))
-  }, [localStorage.USER_DATA])
+    !inputValue.length && dispatch(asyncGetProfileAction())
+  }, [])
 
   const editTextarea = (e) => {
     setInputValue({...inputValue, description: e.target.value});
@@ -52,14 +48,7 @@ const Profile = () => {
 
   const saveChanges = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/profile", {
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'Authorization': localStorage.USER_TOKEN
-      },
-      body: JSON.stringify(inputValue)
-    })
+    dispatch(asyncGetProfileAction(inputValue))
     setInputValue(inputValue)
   }
 
